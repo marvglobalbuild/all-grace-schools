@@ -10,33 +10,234 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AboutOurSchoolRouteImport } from './routes/about-our-school'
+import { Route as AcademicsRouteImport } from './routes/academics'
+import { Route as AdmissionProcessRouteImport } from './routes/admission-process'
+import { Route as AdmissionsRouteImport } from './routes/admissions'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as HowToEnrollYourChildInAClassRouteImport } from './routes/how-to-enroll-your-child-in-a-class'
+import { Route as MediaRouteImport } from './routes/media'
+import { Route as MeetOurProprietorRouteImport } from './routes/meet-our-proprietor'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as NewsListVcRouteImport } from './routes/news-list-vc'
+import { Route as SchoolLifeRouteImport } from './routes/school-life'
+import { Route as WhyYouShouldChooseAllGraceSchoolsRouteImport } from './routes/why-you-should-choose-all-grace-schools'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutOurSchoolRoute = AboutOurSchoolRouteImport.update({
+  id: '/about-our-school',
+  path: '/about-our-school',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademicsRoute = AcademicsRouteImport.update({
+  id: '/academics',
+  path: '/academics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionProcessRoute = AdmissionProcessRouteImport.update({
+  id: '/admission-process',
+  path: '/admission-process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionsRoute = AdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToEnrollYourChildInAClassRoute =
+  HowToEnrollYourChildInAClassRouteImport.update({
+    id: '/how-to-enroll-your-child-in-a-class',
+    path: '/how-to-enroll-your-child-in-a-class',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MediaRoute = MediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetOurProprietorRoute = MeetOurProprietorRouteImport.update({
+  id: '/meet-our-proprietor',
+  path: '/meet-our-proprietor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsListVcRoute = NewsListVcRouteImport.update({
+  id: '/news-list-vc',
+  path: '/news-list-vc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchoolLifeRoute = SchoolLifeRouteImport.update({
+  id: '/school-life',
+  path: '/school-life',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhyYouShouldChooseAllGraceSchoolsRoute =
+  WhyYouShouldChooseAllGraceSchoolsRouteImport.update({
+    id: '/why-you-should-choose-all-grace-schools',
+    path: '/why-you-should-choose-all-grace-schools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/about-our-school': typeof AboutOurSchoolRoute
+  '/academics': typeof AcademicsRoute
+  '/admission-process': typeof AdmissionProcessRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contact': typeof ContactRoute
+  '/contacts': typeof ContactsRoute
+  '/events': typeof EventsRoute
+  '/how-to-enroll-your-child-in-a-class': typeof HowToEnrollYourChildInAClassRoute
+  '/media': typeof MediaRoute
+  '/meet-our-proprietor': typeof MeetOurProprietorRoute
+  '/news': typeof NewsRoute
+  '/news-list-vc': typeof NewsListVcRoute
+  '/school-life': typeof SchoolLifeRoute
+  '/why-you-should-choose-all-grace-schools': typeof WhyYouShouldChooseAllGraceSchoolsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/about-our-school': typeof AboutOurSchoolRoute
+  '/academics': typeof AcademicsRoute
+  '/admission-process': typeof AdmissionProcessRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contact': typeof ContactRoute
+  '/contacts': typeof ContactsRoute
+  '/events': typeof EventsRoute
+  '/how-to-enroll-your-child-in-a-class': typeof HowToEnrollYourChildInAClassRoute
+  '/media': typeof MediaRoute
+  '/meet-our-proprietor': typeof MeetOurProprietorRoute
+  '/news': typeof NewsRoute
+  '/news-list-vc': typeof NewsListVcRoute
+  '/school-life': typeof SchoolLifeRoute
+  '/why-you-should-choose-all-grace-schools': typeof WhyYouShouldChooseAllGraceSchoolsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/about-our-school': typeof AboutOurSchoolRoute
+  '/academics': typeof AcademicsRoute
+  '/admission-process': typeof AdmissionProcessRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contact': typeof ContactRoute
+  '/contacts': typeof ContactsRoute
+  '/events': typeof EventsRoute
+  '/how-to-enroll-your-child-in-a-class': typeof HowToEnrollYourChildInAClassRoute
+  '/media': typeof MediaRoute
+  '/meet-our-proprietor': typeof MeetOurProprietorRoute
+  '/news': typeof NewsRoute
+  '/news-list-vc': typeof NewsListVcRoute
+  '/school-life': typeof SchoolLifeRoute
+  '/why-you-should-choose-all-grace-schools': typeof WhyYouShouldChooseAllGraceSchoolsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/about-our-school'
+    | '/academics'
+    | '/admission-process'
+    | '/admissions'
+    | '/contact'
+    | '/contacts'
+    | '/events'
+    | '/how-to-enroll-your-child-in-a-class'
+    | '/media'
+    | '/meet-our-proprietor'
+    | '/news'
+    | '/news-list-vc'
+    | '/school-life'
+    | '/why-you-should-choose-all-grace-schools'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/about-our-school'
+    | '/academics'
+    | '/admission-process'
+    | '/admissions'
+    | '/contact'
+    | '/contacts'
+    | '/events'
+    | '/how-to-enroll-your-child-in-a-class'
+    | '/media'
+    | '/meet-our-proprietor'
+    | '/news'
+    | '/news-list-vc'
+    | '/school-life'
+    | '/why-you-should-choose-all-grace-schools'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/about-our-school'
+    | '/academics'
+    | '/admission-process'
+    | '/admissions'
+    | '/contact'
+    | '/contacts'
+    | '/events'
+    | '/how-to-enroll-your-child-in-a-class'
+    | '/media'
+    | '/meet-our-proprietor'
+    | '/news'
+    | '/news-list-vc'
+    | '/school-life'
+    | '/why-you-should-choose-all-grace-schools'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AboutOurSchoolRoute: typeof AboutOurSchoolRoute
+  AcademicsRoute: typeof AcademicsRoute
+  AdmissionProcessRoute: typeof AdmissionProcessRoute
+  AdmissionsRoute: typeof AdmissionsRoute
+  ContactRoute: typeof ContactRoute
+  ContactsRoute: typeof ContactsRoute
+  EventsRoute: typeof EventsRoute
+  HowToEnrollYourChildInAClassRoute: typeof HowToEnrollYourChildInAClassRoute
+  MediaRoute: typeof MediaRoute
+  MeetOurProprietorRoute: typeof MeetOurProprietorRoute
+  NewsRoute: typeof NewsRoute
+  NewsListVcRoute: typeof NewsListVcRoute
+  SchoolLifeRoute: typeof SchoolLifeRoute
+  WhyYouShouldChooseAllGraceSchoolsRoute: typeof WhyYouShouldChooseAllGraceSchoolsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +249,132 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about-our-school': {
+      id: '/about-our-school'
+      path: '/about-our-school'
+      fullPath: '/about-our-school'
+      preLoaderRoute: typeof AboutOurSchoolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academics': {
+      id: '/academics'
+      path: '/academics'
+      fullPath: '/academics'
+      preLoaderRoute: typeof AcademicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admission-process': {
+      id: '/admission-process'
+      path: '/admission-process'
+      fullPath: '/admission-process'
+      preLoaderRoute: typeof AdmissionProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admissions': {
+      id: '/admissions'
+      path: '/admissions'
+      fullPath: '/admissions'
+      preLoaderRoute: typeof AdmissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-enroll-your-child-in-a-class': {
+      id: '/how-to-enroll-your-child-in-a-class'
+      path: '/how-to-enroll-your-child-in-a-class'
+      fullPath: '/how-to-enroll-your-child-in-a-class'
+      preLoaderRoute: typeof HowToEnrollYourChildInAClassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media': {
+      id: '/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof MediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meet-our-proprietor': {
+      id: '/meet-our-proprietor'
+      path: '/meet-our-proprietor'
+      fullPath: '/meet-our-proprietor'
+      preLoaderRoute: typeof MeetOurProprietorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news-list-vc': {
+      id: '/news-list-vc'
+      path: '/news-list-vc'
+      fullPath: '/news-list-vc'
+      preLoaderRoute: typeof NewsListVcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/school-life': {
+      id: '/school-life'
+      path: '/school-life'
+      fullPath: '/school-life'
+      preLoaderRoute: typeof SchoolLifeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/why-you-should-choose-all-grace-schools': {
+      id: '/why-you-should-choose-all-grace-schools'
+      path: '/why-you-should-choose-all-grace-schools'
+      fullPath: '/why-you-should-choose-all-grace-schools'
+      preLoaderRoute: typeof WhyYouShouldChooseAllGraceSchoolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AboutOurSchoolRoute: AboutOurSchoolRoute,
+  AcademicsRoute: AcademicsRoute,
+  AdmissionProcessRoute: AdmissionProcessRoute,
+  AdmissionsRoute: AdmissionsRoute,
+  ContactRoute: ContactRoute,
+  ContactsRoute: ContactsRoute,
+  EventsRoute: EventsRoute,
+  HowToEnrollYourChildInAClassRoute: HowToEnrollYourChildInAClassRoute,
+  MediaRoute: MediaRoute,
+  MeetOurProprietorRoute: MeetOurProprietorRoute,
+  NewsRoute: NewsRoute,
+  NewsListVcRoute: NewsListVcRoute,
+  SchoolLifeRoute: SchoolLifeRoute,
+  WhyYouShouldChooseAllGraceSchoolsRoute:
+    WhyYouShouldChooseAllGraceSchoolsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

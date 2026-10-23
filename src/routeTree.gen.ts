@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AboutOurSchoolRouteImport } from './routes/about-our-school'
 import { Route as AcademicsRouteImport } from './routes/academics'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdmissionProcessRouteImport } from './routes/admission-process'
 import { Route as AdmissionsRouteImport } from './routes/admissions'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -44,6 +45,11 @@ const AboutOurSchoolRoute = AboutOurSchoolRouteImport.update({
 const AcademicsRoute = AcademicsRouteImport.update({
   id: '/academics',
   path: '/academics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdmissionProcessRoute = AdmissionProcessRouteImport.update({
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/about-our-school': typeof AboutOurSchoolRoute
   '/academics': typeof AcademicsRoute
+  '/admin': typeof AdminRoute
   '/admission-process': typeof AdmissionProcessRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/about-our-school': typeof AboutOurSchoolRoute
   '/academics': typeof AcademicsRoute
+  '/admin': typeof AdminRoute
   '/admission-process': typeof AdmissionProcessRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/about-our-school': typeof AboutOurSchoolRoute
   '/academics': typeof AcademicsRoute
+  '/admin': typeof AdminRoute
   '/admission-process': typeof AdmissionProcessRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/about-our-school'
     | '/academics'
+    | '/admin'
     | '/admission-process'
     | '/admissions'
     | '/contact'
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/about-our-school'
     | '/academics'
+    | '/admin'
     | '/admission-process'
     | '/admissions'
     | '/contact'
@@ -207,6 +218,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/about-our-school'
     | '/academics'
+    | '/admin'
     | '/admission-process'
     | '/admissions'
     | '/contact'
@@ -226,6 +238,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AboutOurSchoolRoute: typeof AboutOurSchoolRoute
   AcademicsRoute: typeof AcademicsRoute
+  AdminRoute: typeof AdminRoute
   AdmissionProcessRoute: typeof AdmissionProcessRoute
   AdmissionsRoute: typeof AdmissionsRoute
   ContactRoute: typeof ContactRoute
@@ -268,6 +281,13 @@ declare module '@tanstack/react-router' {
       path: '/academics'
       fullPath: '/academics'
       preLoaderRoute: typeof AcademicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admission-process': {
@@ -362,6 +382,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AboutOurSchoolRoute: AboutOurSchoolRoute,
   AcademicsRoute: AcademicsRoute,
+  AdminRoute: AdminRoute,
   AdmissionProcessRoute: AdmissionProcessRoute,
   AdmissionsRoute: AdmissionsRoute,
   ContactRoute: ContactRoute,

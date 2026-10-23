@@ -48,6 +48,8 @@ raw_homepage.html
 embedded_styles.css
 media_urls.json
 allgraceschools_data.json
+server_render.html
+build_static_hosting.js
 COLOR_SCHEME.md
 CONTACTS_AND_LINKS.md
 ALL_GRACE_SCHOOLS_RESOURCES.md

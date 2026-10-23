@@ -88,7 +88,17 @@ export function SiteFooter() {
 
       <div className="border-t border-ink-foreground/10">
         <div className="container-page flex flex-col gap-3 py-6 text-[13px] text-ink-foreground/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} All Grace Schools, Uyo.</p>
+          <p>
+            © {new Date().getFullYear()} All Grace Schools, Uyo. · Built by{" "}
+            <a
+              href="https://marvs-digital-showcase.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-tartan hover:underline hover:text-white transition-colors"
+            >
+              Marvglobal Digitalz
+            </a>
+          </p>
           <div className="flex gap-5">
             <a
               href={school.facebookUrl}
@@ -108,6 +118,12 @@ export function SiteFooter() {
               School Portal <ArrowUpRight className="size-3" aria-hidden />
               <span className="sr-only">(opens in a new tab)</span>
             </a>
+            <Link
+              to="/admin"
+              className="inline-flex items-center gap-1 link-underline opacity-60 hover:opacity-100 transition-opacity"
+            >
+              School CMS
+            </Link>
           </div>
         </div>
       </div>

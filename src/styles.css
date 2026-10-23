@@ -77,11 +77,11 @@
 :root {
   --radius: 0.375rem;
 
-  /* Paper #F6F2E9, Paper deep #EDE6D6, Ink #0A1A40 */
-  --paper: oklch(0.962 0.013 86.8);
-  --paper-deep: oklch(0.926 0.023 87.2);
-  --ink: oklch(0.231 0.076 264.1);
-  --ink-foreground: oklch(0.962 0.013 86.8);
+  /* Crisp Pure White Background #FFFFFF, Soft tint #F8FAFC, Ink #0A1A40 */
+  --paper: #ffffff;
+  --paper-deep: #f8fafc;
+  --ink: #0A1A40;
+  --ink-foreground: #ffffff;
 
   /* Crest blue #093CA5, deep #06276E, soft #DCE5F7 */
   --crest: oklch(0.402 0.177 262.4);
@@ -90,39 +90,39 @@
 
   /* Tartan red #C8161D, Shield green #0A7F41 */
   --tartan: oklch(0.531 0.206 26.9);
-  --tartan-foreground: oklch(0.994 0.007 88.6);
+  --tartan-foreground: #ffffff;
   --shield: oklch(0.524 0.134 152.2);
 
   /* Content-review notes (amber) */
   --review: oklch(0.95 0.06 85);
   --review-foreground: oklch(0.38 0.08 60);
 
-  --background: var(--paper);
+  --background: #ffffff;
   --foreground: var(--ink);
-  --card: oklch(0.994 0.007 88.6);
+  --card: #ffffff;
   --card-foreground: var(--ink);
-  --popover: oklch(0.994 0.007 88.6);
+  --popover: #ffffff;
   --popover-foreground: var(--ink);
   --primary: var(--crest);
-  --primary-foreground: oklch(0.994 0.007 88.6);
-  --secondary: var(--paper-deep);
+  --primary-foreground: #ffffff;
+  --secondary: #f8fafc;
   --secondary-foreground: var(--ink);
-  --muted: var(--paper-deep);
-  --muted-foreground: oklch(0.47 0.044 268.4);
-  --accent: var(--crest-soft);
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f0f4fd;
   --accent-foreground: var(--crest-deep);
   --destructive: var(--tartan);
   --destructive-foreground: var(--tartan-foreground);
-  --border: oklch(0.862 0.026 86.9);
-  --input: oklch(0.862 0.026 86.9);
+  --border: #e2e8f0;
+  --input: #e2e8f0;
   --ring: var(--crest);
 
   --chart-1: var(--crest);
   --chart-2: var(--tartan);
   --chart-3: var(--shield);
   --chart-4: var(--ink);
-  --chart-5: var(--paper-deep);
-  --sidebar: var(--paper);
+  --chart-5: #f8fafc;
+  --sidebar: #ffffff;
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--crest);
   --sidebar-primary-foreground: var(--primary-foreground);

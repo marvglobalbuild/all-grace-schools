@@ -158,28 +158,47 @@ export function FloatingWhatsApp() {
         </div>
       )}
 
-      {/* Floating Trigger Button */}
-      <button
-        type="button"
-        onClick={handleToggle}
-        aria-expanded={open}
-        aria-haspopup="dialog"
-        className="group relative flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 text-white shadow-[0_8px_25px_-4px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-105 hover:bg-[#20ba59] active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
-        aria-label="Chat with Admissions on WhatsApp"
-      >
-        <div className="relative">
-          <WhatsAppIcon className="size-6 fill-white" />
-          {hasUnread && (
-            <span className="absolute -top-1 -right-1 flex size-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-              <span className="relative inline-flex size-3 rounded-full bg-amber-400" />
-            </span>
-          )}
-        </div>
-        <span className="font-sans text-sm font-semibold tracking-wide text-white drop-shadow-sm">
-          Chat on WhatsApp
-        </span>
-      </button>
+      {/* Floating Trigger Area */}
+      <div className="flex items-center gap-2">
+        {/* Mobile Prompt Chip (modeled directly on reference screenshot) */}
+        {!open && (
+          <div
+            onClick={handleToggle}
+            className="flex flex-col rounded-xl border border-border/80 bg-white/95 px-3 py-2 text-left shadow-lg backdrop-blur-md cursor-pointer transition-transform hover:scale-[1.02] active:scale-95 sm:hidden max-w-[200px]"
+          >
+            <p className="text-[10.5px] text-muted-foreground font-medium truncate">
+              Have admission questions?
+            </p>
+            <p className="flex items-center gap-1 text-[11.5px] font-bold text-ink">
+              <span>Chat with our team</span>
+              <span className="text-crest">→</span>
+            </p>
+          </div>
+        )}
+
+        {/* Floating WhatsApp Action Button */}
+        <button
+          type="button"
+          onClick={handleToggle}
+          aria-expanded={open}
+          aria-haspopup="dialog"
+          className="group relative flex size-12 sm:size-auto sm:h-12 items-center justify-center sm:justify-start gap-2.5 rounded-full bg-[#25D366] sm:px-5 text-white shadow-[0_8px_25px_-4px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-105 hover:bg-[#20ba59] active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+          aria-label="Chat with Admissions on WhatsApp"
+        >
+          <div className="relative">
+            <WhatsAppIcon className="size-6 fill-white" />
+            {hasUnread && (
+              <span className="absolute -top-1 -right-1 flex size-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                <span className="relative inline-flex size-3 rounded-full bg-amber-400" />
+              </span>
+            )}
+          </div>
+          <span className="hidden font-sans text-sm font-semibold tracking-wide text-white drop-shadow-sm sm:inline">
+            Chat on WhatsApp
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

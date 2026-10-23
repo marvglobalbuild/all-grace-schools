@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Play } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
 import { ReviewNote } from "@/components/site/ReviewNote";
 import { AdmissionsBand, Figure, SectionHeading, TextLink } from "@/components/site/blocks";
+import { VideoTourSection, VideoModal } from "@/components/site/VideoTour";
 import { photos } from "@/content/images";
 import {
   SITE_URL,
@@ -69,6 +71,7 @@ function Home() {
       <Stages />
       <Strengths />
       <SchoolLife />
+      <VideoTourSection />
       <Leadership />
       <AdmissionsPreview />
       <AdmissionsBand />
@@ -77,6 +80,8 @@ function Home() {
 }
 
 function Hero() {
+  const [videoOpen, setVideoOpen] = useState(false);
+
   return (
     <section className="relative overflow-hidden">
       <div className="container-page grid gap-10 pb-16 pt-10 md:pt-16 lg:grid-cols-12 lg:gap-8 lg:pb-24">
@@ -108,11 +113,20 @@ function Hero() {
             <Button asChild variant="line" size="lg">
               <Link to="/academics">Explore learning stages</Link>
             </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              onClick={() => setVideoOpen(true)}
+              className="gap-2 cursor-pointer border-ink/20 hover:border-crest hover:text-crest"
+            >
+              <Play className="size-4 fill-crest text-crest" aria-hidden /> Watch Video Tour
+            </Button>
           </div>
         </div>
 
         <div className="relative lg:col-span-6">
-          <div className="overflow-hidden rounded-md shadow-photo">
+          <div className="relative overflow-hidden rounded-md shadow-photo group">
             <img
               src={photos.campus.src}
               alt={photos.campus.alt}
@@ -121,6 +135,14 @@ function Hero() {
               fetchPriority="high"
               className="aspect-[5/4] w-full object-cover object-[30%_50%] animate-photo lg:aspect-[4/5]"
             />
+            <button
+              type="button"
+              onClick={() => setVideoOpen(true)}
+              className="absolute bottom-4 right-4 z-10 flex items-center gap-2 rounded-full bg-ink/85 px-4 py-2 text-xs font-semibold text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:bg-crest hover:scale-105 cursor-pointer"
+              aria-label="Play video tour"
+            >
+              <Play className="size-3.5 fill-amber-400 text-amber-400" /> Watch Video Tour
+            </button>
           </div>
           <div
             className="absolute -bottom-8 left-4 w-[46%] max-w-[260px] overflow-hidden rounded-md border-4 border-background shadow-photo animate-rise sm:left-[-1.5rem] lg:-left-12"
@@ -137,6 +159,7 @@ function Hero() {
         </div>
       </div>
       <div className="stripe-tartan h-1.5" aria-hidden />
+      <VideoModal isOpen={videoOpen} onClose={() => setVideoOpen(false)} />
     </section>
   );
 }

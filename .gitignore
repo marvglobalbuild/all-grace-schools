@@ -30,3 +30,27 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Scrapers, audit dumps, and legacy trial
+legacy_trial/
+assets/
+*.js.bak
+*.css.bak
+crawler.js
+deep_font_search.js
+download_fonts.js
+download_images.js
+extract_full_content.js
+extract_info.js
+find_fonts.js
+analyze_homepage.js
+raw_homepage.html
+embedded_styles.css
+media_urls.json
+allgraceschools_data.json
+COLOR_SCHEME.md
+CONTACTS_AND_LINKS.md
+ALL_GRACE_SCHOOLS_RESOURCES.md
+LOCKED_SPECIFICATIONS.md
+
+node_modules

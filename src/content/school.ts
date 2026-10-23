@@ -10,7 +10,7 @@
 export const SITE_URL = "https://allgraceschools.com";
 
 /** Set to false once the school has confirmed every item in REVIEW_ITEMS. */
-export const SHOW_REVIEW_NOTES = true;
+export const SHOW_REVIEW_NOTES = false;
 
 export const SOURCES = {
   home: "https://allgraceschools.com/",

@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowUpRight, Play } from "lucide-react";
 
 import { Reveal } from "@/components/site/Reveal";
 import { ReviewNote } from "@/components/site/ReviewNote";
 import { AdmissionsBand, Figure, PageIntro, SectionHeading } from "@/components/site/blocks";
+import { VideoModal } from "@/components/site/VideoTour";
 import { photos } from "@/content/images";
 import { achievements, clubs, school } from "@/content/school";
 import { pageHead } from "@/lib/seo";
@@ -38,6 +40,8 @@ const facilities = [
 ];
 
 function SchoolLife() {
+  const [videoOpen, setVideoOpen] = useState(false);
+
   return (
     <>
       <PageIntro
@@ -123,23 +127,26 @@ function SchoolLife() {
             <p className="eyebrow">Media</p>
             <h2 className="display-md mt-4">See more of the school.</h2>
             <p className="mt-4 text-[15.5px] leading-relaxed text-muted-foreground">
-              Watch the school video, or follow All Grace Schools on Facebook for news of
+              Watch the school video presentation, or follow All Grace Schools on Facebook for news of
               events and activities.
             </p>
             <ul className="mt-8 space-y-3">
               <li>
-                <a
-                  href={school.videoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-md border border-ink/15 bg-background px-5 py-4 font-medium transition-colors hover:border-ink"
+                <button
+                  type="button"
+                  onClick={() => setVideoOpen(true)}
+                  className="w-full text-left group flex items-center justify-between rounded-md border border-ink/15 bg-background px-5 py-4 font-medium transition-colors hover:border-crest hover:bg-card cursor-pointer"
                 >
-                  <span className="inline-flex items-center gap-3">
-                    <Play className="size-4 text-tartan" aria-hidden /> All Grace Schools video
+                  <span className="inline-flex items-center gap-3 text-ink">
+                    <span className="flex size-7 items-center justify-center rounded-full bg-tartan/10 text-tartan group-hover:bg-tartan group-hover:text-white transition-colors">
+                      <Play className="size-3.5 fill-current ml-0.5" aria-hidden />
+                    </span>
+                    Watch school video presentation
                   </span>
-                  <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
-                  <span className="sr-only">(opens YouTube in a new tab)</span>
-                </a>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-crest">
+                    Play
+                  </span>
+                </button>
               </li>
               <li>
                 <a
@@ -159,6 +166,7 @@ function SchoolLife() {
       </section>
 
       <AdmissionsBand />
+      <VideoModal isOpen={videoOpen} onClose={() => setVideoOpen(false)} />
     </>
   );
 }

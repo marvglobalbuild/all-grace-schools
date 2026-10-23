@@ -50,6 +50,8 @@ media_urls.json
 allgraceschools_data.json
 server_render.html
 build_static_hosting.js
+build_wordpress_theme.js
+wordpress_theme/
 COLOR_SCHEME.md
 CONTACTS_AND_LINKS.md
 ALL_GRACE_SCHOOLS_RESOURCES.md

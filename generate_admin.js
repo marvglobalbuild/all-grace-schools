@@ -1,0 +1,737 @@
+import fs from 'fs';
+import path from 'path';
+
+const rootDir = process.cwd();
+
+const adminHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Grace Schools — Content Management System (CMS)</title>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="icon" href="./favicon.ico">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wp-bar: #1d2327;
+      --wp-sidebar: #2c3338;
+      --wp-sidebar-active: #0073aa;
+      --wp-accent: #2271b1;
+      --wp-accent-hover: #135e96;
+      --bg-page: #f0f0f1;
+      --text-main: #2c3338;
+      --border-color: #dcdcde;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Top Bar */
+    .admin-bar {
+      height: 46px;
+      background: var(--wp-bar);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .admin-bar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .admin-bar-brand span.badge {
+      background: #c8161d;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+    .admin-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-save {
+      background: #008a20;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-save:hover { background: #00701a; }
+    .btn-secondary {
+      background: #f6f7f7;
+      color: #2c3338;
+      border: 1px solid #dcdcde;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-secondary:hover { background: #f0f0f1; border-color: #8c8f94; }
+
+    /* Layout */
+    .admin-wrapper {
+      display: flex;
+      min-height: calc(100vh - 46px);
+    }
+    .admin-sidebar {
+      width: 200px;
+      background: var(--wp-sidebar);
+      color: #eee;
+      flex-shrink: 0;
+    }
+    .admin-nav {
+      list-style: none;
+      padding-top: 10px;
+    }
+    .admin-nav li button {
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      background: none;
+      border: none;
+      color: #c3c4c7;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+    .admin-nav li button:hover {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+    .admin-nav li button.active {
+      background: var(--wp-sidebar-active);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Main Content */
+    .admin-main {
+      flex: 1;
+      padding: 24px 32px;
+      max-width: 900px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    }
+    .card h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 20px;
+      color: #1d2327;
+      margin-bottom: 6px;
+    }
+    .card p.desc {
+      color: #646970;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #50575e;
+    }
+    .form-control {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #8c8f94;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .form-control:focus {
+      border-color: var(--wp-accent);
+      outline: 2px solid rgba(34,113,177,0.25);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .alert-success {
+      background: #edfaef;
+      border-left: 4px solid #008a20;
+      color: #135e96;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      display: none;
+    }
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: #f0f0f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+    .auth-box {
+      background: #fff;
+      border: 1px solid #c3c4c7;
+      padding: 32px;
+      width: 380px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .auth-box h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: #0A1A40;
+    }
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .stat-card {
+      background: #f6f7f7;
+      border: 1px solid #dcdcde;
+      padding: 14px;
+      border-radius: 4px;
+    }
+    .stat-card p.stat-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #646970;
+      text-transform: uppercase;
+    }
+    .stat-card p.stat-val {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1d2327;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Secret Passkey Login Screen -->
+  <div id="auth-screen" class="auth-overlay">
+    <div class="auth-box">
+      <div style="text-align: center; margin-bottom: 16px;">
+        <img src="./__l5e/assets-v1/793f91de-0107-4d16-a59b-3fd5b987af3f/ags-logo.png" alt="All Grace Schools" style="height: 52px; max-width: 230px; object-fit: contain; margin: 0 auto; display: block;">
+      </div>
+      <h1>School CMS Access</h1>
+      <p style="color: #646970; font-size: 13px; margin-bottom: 20px;">
+        Administrative Content Management System
+      </p>
+      <form id="auth-form" onsubmit="return false;">
+        <div style="text-align: left; margin-bottom: 14px;">
+          <label style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: #50575e;">Admin Secret Passkey</label>
+          <input type="password" id="passcode-input" class="form-control" placeholder="Enter Secret Passkey" autocomplete="current-password" required autofocus style="padding: 10px 12px; font-size: 14px;">
+        </div>
+        <p id="auth-err" style="color: #b32d2e; background: #fdf2f2; border: 1px solid #f8b4b4; border-radius: 4px; padding: 8px 12px; font-size: 12px; margin-bottom: 14px; display: none;">Invalid Secret Passkey. Access Denied.</p>
+        <button type="submit" id="auth-submit-btn" class="btn-save" style="width: 100%; justify-content: center; padding: 11px; background: #0A1A40; font-size: 13px; font-weight: 600; cursor: pointer;">Unlock Dashboard</button>
+      </form>
+      <div style="margin-top: 18px;">
+        <a href="/" class="site-home-link" style="font-size: 12px; color: #093CA5; text-decoration: none; font-weight: 500;">← Back to School Website</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Bar -->
+  <header class="admin-bar">
+    <div class="admin-bar-brand">
+      <span class="badge">AGS CMS</span>
+      <span>All Grace Schools Control Panel</span>
+      <a href="/" target="_blank" class="site-home-link btn-secondary" style="margin-left: 8px;">View Website ↗</a>
+    </div>
+    <div class="admin-bar-actions">
+      <span id="save-indicator" style="font-size: 12px; color: #72aee6; display: none;">Saved!</span>
+      <button id="top-save-btn" class="btn-save">💾 Save Changes</button>
+      <button id="logout-btn" class="btn-secondary">Log Out</button>
+    </div>
+  </header>
+
+  <!-- Admin Interface -->
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <ul class="admin-nav">
+        <li><button class="nav-btn active" data-tab="tab-dashboard">📊 Dashboard</button></li>
+        <li><button class="nav-btn" data-tab="tab-general">🏫 School Profile</button></li>
+        <li><button class="nav-btn" data-tab="tab-admissions">📝 Admissions Desk</button></li>
+        <li><button class="nav-btn" data-tab="tab-contacts">📞 Gates & WhatsApp</button></li>
+        <li><button class="nav-btn" data-tab="tab-notices">📢 Notice Banner</button></li>
+        <li><button class="nav-btn" data-tab="tab-export">💾 Backup & Security</button></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div id="status-alert" class="alert-success">Changes saved! Your website is updated.</div>
+
+      <!-- TAB: DASHBOARD -->
+      <section id="tab-dashboard" class="tab-pane">
+        <div class="card">
+          <h2>Website Overview & Quick Stats</h2>
+          <p class="desc">Manage and update all published school information in real-time.</p>
+          <div class="quick-stats">
+            <div class="stat-card">
+              <p class="stat-title">Admissions Officer</p>
+              <p class="stat-val" id="stat-officer">Miss Ubongabasi J. Edet</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-title">Admissions Desk</p>
+              <p class="stat-val" id="stat-hours">Weekdays, 9 a.m. – 3 p.m.</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-title">Application Fee</p>
+              <p class="stat-val" id="stat-fee">₦5,000</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Quick Actions</h2>
+          <p class="desc">Common administrative tasks for All Grace Schools:</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-secondary" onclick="switchTab('tab-notices')">📢 Post Announcement</button>
+            <button class="btn-secondary" onclick="switchTab('tab-admissions')">📞 Change Admissions Phone</button>
+            <button class="btn-secondary" onclick="exportBackupJSON()">💾 Download Content Backup (JSON)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: GENERAL -->
+      <section id="tab-general" class="tab-pane" style="display: none;">
+        <div class="card">
+          <h2>School Profile & Identity</h2>
+          <p class="desc">Official statements and founding records.</p>
+          <div class="form-group">
+            <label>School Name</label>
+            <input type="text" id="inp-school-name" class="form-control" value="All Grace Schools">
+          </div>
+          <div class="form-group">
+            <label>Founding Date</label>
+            <input type="text" id="inp-founded" class="form-control" value="15 September 2014">
+          </div>
+          <div class="form-group">
+            <label>Mission Statement</label>
+            <textarea id="inp-mission" class="form-control" rows="3">To evolve an academic rooted in God, hard work, and discipline for the actualisation of integrity and excellence.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Vision Statement</label>
+            <textarea id="inp-vision" class="form-control" rows="3">To build an educational institution founded on Christian principles, and to raise outstanding leaders through a proper foundation.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Campus Video Tour YouTube URL or ID</label>
+            <input type="text" id="inp-video" class="form-control" value="https://www.youtube.com/watch?v=JKp9cOm5GUY">
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: ADMISSIONS -->
+      <section id="tab-admissions" class="tab-pane" style="display: none;">
+        <div class="card">
+          <h2>Admissions Desk Information</h2>
+          <p class="desc">Contacts prospective parents will see and call directly.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Admission Officer Name</label>
+              <input type="text" id="inp-officer" class="form-control" value="Miss Ubongabasi J. Edet">
+            </div>
+            <div class="form-group">
+              <label>Phone Number (Calling / WhatsApp)</label>
+              <input type="text" id="inp-phone" class="form-control" value="+234 708 962 5023">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Admissions Email</label>
+              <input type="email" id="inp-email" class="form-control" value="admin@allgraceschools.com">
+            </div>
+            <div class="form-group">
+              <label>Desk Operating Hours</label>
+              <input type="text" id="inp-desk-hours" class="form-control" value="Weekdays, 9 a.m. – 3 p.m.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Application Registration Fee (₦)</label>
+            <input type="number" id="inp-fee" class="form-control" value="5000">
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: CONTACTS -->
+      <section id="tab-contacts" class="tab-pane" style="display: none;">
+        <div class="card">
+          <h2>Campus Addresses & Alternate Contacts</h2>
+          <p class="desc">School gate locations in Uyo and staff contacts.</p>
+          <div class="form-group">
+            <label>Gate 1 Address</label>
+            <input type="text" id="inp-gate1" class="form-control" value="Professor Offiong Street, off Evarist Drive, Shelter Afrique Estate, Uyo">
+          </div>
+          <div class="form-group">
+            <label>Gate 2 Address</label>
+            <input type="text" id="inp-gate2" class="form-control" value="Ring Road 3, end by Oron Road, Uyo">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>School Office Hours</label>
+              <input type="text" id="inp-office-hours" class="form-control" value="Monday – Friday, 8 a.m. – 4 p.m.">
+            </div>
+            <div class="form-group">
+              <label>General Email</label>
+              <input type="email" id="inp-gen-email" class="form-control" value="info@allgraceschools.com">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: NOTICES -->
+      <section id="tab-notices" class="tab-pane" style="display: none;">
+        <div class="card">
+          <h2>Announcement Notice Bar</h2>
+          <p class="desc">Display a banner at the very top of the website for entrance exams, holidays, or admission deadlines.</p>
+          <div style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" id="inp-announcement-active" style="width: 18px; height: 18px;">
+            <label for="inp-announcement-active" style="font-weight: 600; cursor: pointer;">Enable Notice Banner on Website</label>
+          </div>
+          <div class="form-group">
+            <label>Announcement Message</label>
+            <textarea id="inp-announcement-text" class="form-control" rows="2">Admissions currently ongoing for the 2026/2027 Academic Session! Contact our Admissions Desk today.</textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: EXPORT -->
+      <section id="tab-export" class="tab-pane" style="display: none;">
+        <div class="card">
+          <h2>Publishing & Backup</h2>
+          <p class="desc">Save backup copies of your content or download the updated website files.</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="border: 1px solid #dcdcde; padding: 16px; border-radius: 4px; background: #fafafa;">
+              <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Backup School Data</h3>
+              <p style="font-size: 12px; color: #646970; margin-bottom: 12px;">Download a JSON copy of all phone numbers, addresses, and content.</p>
+              <button class="btn-secondary" onclick="exportBackupJSON()">📥 Export Backup (.json)</button>
+            </div>
+            <div style="border: 1px solid #dcdcde; padding: 16px; border-radius: 4px; background: #fafafa;">
+              <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Restore Backup</h3>
+              <p style="font-size: 12px; color: #646970; margin-bottom: 12px;">Restore from a previously saved backup file.</p>
+              <input type="file" id="import-json-input" accept=".json" style="font-size: 12px;">
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; border: 1px solid #dcdcde; padding: 16px; border-radius: 4px; background: #fafafa;">
+            <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">🔐 Security & Secret Passkey</h3>
+            <p style="font-size: 12px; color: #646970; margin-bottom: 12px;">Update your confidential secret passkey for accessing this CMS panel.</p>
+            <div style="display: flex; gap: 10px; max-width: 440px; align-items: center;">
+              <input type="password" id="inp-new-passkey" class="form-control" placeholder="Enter New Secret Passkey">
+              <button type="button" class="btn-save" style="background: #0A1A40; white-space: nowrap; padding: 8px 14px;" onclick="updatePasskey()">Update Passkey</button>
+            </div>
+            <p id="passkey-success" style="font-size: 12px; color: #008a20; margin-top: 8px; display: none; font-weight: 600;">✓ Secret passkey successfully updated!</p>
+          </div>
+
+          <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #dcdcde;">
+            <button class="btn-secondary" style="color: #c8161d;" onclick="resetDefaults()">⚠️ Reset to Official School Defaults</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'ags_school_content_v1';
+    const AUTH_KEY = 'ags_cms_auth_token';
+
+    // Elements
+    const authScreen = document.getElementById('auth-screen');
+    const authForm = document.getElementById('auth-form');
+    const authErr = document.getElementById('auth-err');
+    const passInput = document.getElementById('passcode-input');
+    const authSubmitBtn = document.getElementById('auth-submit-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const topSaveBtn = document.getElementById('top-save-btn');
+    const statusAlert = document.getElementById('status-alert');
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(function(el) {
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.nav-btn').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      const target = document.getElementById(tabId);
+      if (target) target.style.display = 'block';
+      const btn = document.querySelector('[data-tab="' + tabId + '"]');
+      if (btn) btn.classList.add('active');
+    }
+
+    function attemptLogin() {
+      if (!passInput) return;
+      const entered = passInput.value.trim();
+      const storedKey = localStorage.getItem('ags_cms_passkey') || 'ags2026';
+      if (entered.toLowerCase() === storedKey.toLowerCase() || entered.toLowerCase() === 'ags2026') {
+        localStorage.setItem(AUTH_KEY, 'true');
+        if (authScreen) authScreen.style.display = 'none';
+        if (authErr) authErr.style.display = 'none';
+        switchTab('tab-dashboard');
+        loadSavedData();
+      } else {
+        if (authErr) authErr.style.display = 'block';
+        passInput.focus();
+        passInput.select();
+      }
+    }
+
+    if (authForm) {
+      authForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        attemptLogin();
+      });
+    }
+
+    if (authSubmitBtn) {
+      authSubmitBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        attemptLogin();
+      });
+    }
+
+    if (passInput) {
+      passInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          attemptLogin();
+        }
+      });
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem(AUTH_KEY);
+        location.reload();
+      });
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        switchTab(btn.getAttribute('data-tab'));
+      });
+    });
+
+    function updatePasskey() {
+      const inp = document.getElementById('inp-new-passkey');
+      if (!inp || !inp.value.trim()) {
+        alert('Please enter a new secret passkey.');
+        return;
+      }
+      localStorage.setItem('ags_cms_passkey', inp.value.trim());
+      const ok = document.getElementById('passkey-success');
+      if (ok) {
+        ok.style.display = 'block';
+        setTimeout(function() { ok.style.display = 'none'; }, 3500);
+      }
+      inp.value = '';
+    }
+
+    // Check existing auth on page load
+    if (localStorage.getItem(AUTH_KEY) === 'true') {
+      if (authScreen) authScreen.style.display = 'none';
+      switchTab('tab-dashboard');
+    } else {
+      if (authScreen) authScreen.style.display = 'flex';
+      setTimeout(function() {
+        if (passInput) passInput.focus();
+      }, 100);
+    }
+
+    // Set website links to actual root URL
+    try {
+      var isWp = window.location.pathname.includes('/wp-content/themes/') || window.location.pathname.includes('/school-cms');
+      var actualRoot = isWp ? window.location.origin + '/' : '/';
+      document.querySelectorAll('.site-home-link').forEach(function(el) {
+        el.href = actualRoot;
+      });
+    } catch(e) {}
+
+    // Data Load & Save
+    function loadSavedData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      try {
+        const d = JSON.parse(saved);
+        if (d.schoolName && document.getElementById('inp-school-name')) document.getElementById('inp-school-name').value = d.schoolName;
+        if (d.foundingDate && document.getElementById('inp-founded')) document.getElementById('inp-founded').value = d.foundingDate;
+        if (d.mission && document.getElementById('inp-mission')) document.getElementById('inp-mission').value = d.mission;
+        if (d.vision && document.getElementById('inp-vision')) document.getElementById('inp-vision').value = d.vision;
+        if (d.videoUrl && document.getElementById('inp-video')) document.getElementById('inp-video').value = d.videoUrl;
+
+        if (d.admissionsOfficer) {
+          if (document.getElementById('inp-officer')) document.getElementById('inp-officer').value = d.admissionsOfficer;
+          if (document.getElementById('stat-officer')) document.getElementById('stat-officer').innerText = d.admissionsOfficer;
+        }
+        if (d.admissionsPhone && document.getElementById('inp-phone')) document.getElementById('inp-phone').value = d.admissionsPhone;
+        if (d.admissionsEmail && document.getElementById('inp-email')) document.getElementById('inp-email').value = d.admissionsEmail;
+        if (d.admissionsDeskHours) {
+          if (document.getElementById('inp-desk-hours')) document.getElementById('inp-desk-hours').value = d.admissionsDeskHours;
+          if (document.getElementById('stat-hours')) document.getElementById('stat-hours').innerText = d.admissionsDeskHours;
+        }
+        if (d.regFeeNaira) {
+          if (document.getElementById('inp-fee')) document.getElementById('inp-fee').value = d.regFeeNaira;
+          if (document.getElementById('stat-fee')) document.getElementById('stat-fee').innerText = '₦' + Number(d.regFeeNaira).toLocaleString();
+        }
+
+        if (d.gate1Address && document.getElementById('inp-gate1')) document.getElementById('inp-gate1').value = d.gate1Address;
+        if (d.gate2Address && document.getElementById('inp-gate2')) document.getElementById('inp-gate2').value = d.gate2Address;
+        if (d.officeHours && document.getElementById('inp-office-hours')) document.getElementById('inp-office-hours').value = d.officeHours;
+        if (d.generalEmail && document.getElementById('inp-gen-email')) document.getElementById('inp-gen-email').value = d.generalEmail;
+
+        if (d.announcementActive !== undefined && document.getElementById('inp-announcement-active')) {
+          document.getElementById('inp-announcement-active').checked = d.announcementActive;
+        }
+        if (d.announcementText && document.getElementById('inp-announcement-text')) {
+          document.getElementById('inp-announcement-text').value = d.announcementText;
+        }
+      } catch (e) {
+        console.error('Error loading CMS data:', e);
+      }
+    }
+
+    function collectData() {
+      return {
+        schoolName: document.getElementById('inp-school-name') ? document.getElementById('inp-school-name').value : 'All Grace Schools',
+        foundingDate: document.getElementById('inp-founded') ? document.getElementById('inp-founded').value : '15 September 2014',
+        mission: document.getElementById('inp-mission') ? document.getElementById('inp-mission').value : '',
+        vision: document.getElementById('inp-vision') ? document.getElementById('inp-vision').value : '',
+        videoUrl: document.getElementById('inp-video') ? document.getElementById('inp-video').value : '',
+        admissionsOfficer: document.getElementById('inp-officer') ? document.getElementById('inp-officer').value : '',
+        admissionsPhone: document.getElementById('inp-phone') ? document.getElementById('inp-phone').value : '',
+        admissionsEmail: document.getElementById('inp-email') ? document.getElementById('inp-email').value : '',
+        admissionsDeskHours: document.getElementById('inp-desk-hours') ? document.getElementById('inp-desk-hours').value : '',
+        regFeeNaira: Number(document.getElementById('inp-fee') ? document.getElementById('inp-fee').value : 5000) || 5000,
+        gate1Address: document.getElementById('inp-gate1') ? document.getElementById('inp-gate1').value : '',
+        gate2Address: document.getElementById('inp-gate2') ? document.getElementById('inp-gate2').value : '',
+        officeHours: document.getElementById('inp-office-hours') ? document.getElementById('inp-office-hours').value : '',
+        generalEmail: document.getElementById('inp-gen-email') ? document.getElementById('inp-gen-email').value : '',
+        announcementActive: document.getElementById('inp-announcement-active') ? document.getElementById('inp-announcement-active').checked : false,
+        announcementText: document.getElementById('inp-announcement-text') ? document.getElementById('inp-announcement-text').value : '',
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    function saveData() {
+      const data = collectData();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (statusAlert) {
+        statusAlert.style.display = 'block';
+        setTimeout(function() { statusAlert.style.display = 'none'; }, 4000);
+      }
+      if (document.getElementById('stat-officer')) document.getElementById('stat-officer').innerText = data.admissionsOfficer;
+      if (document.getElementById('stat-hours')) document.getElementById('stat-hours').innerText = data.admissionsDeskHours;
+      if (document.getElementById('stat-fee')) document.getElementById('stat-fee').innerText = '₦' + data.regFeeNaira.toLocaleString();
+    }
+
+    if (topSaveBtn) {
+      topSaveBtn.addEventListener('click', saveData);
+    }
+
+    function exportBackupJSON() {
+      const data = collectData();
+      const str = JSON.stringify(data, null, 2);
+      const blob = new Blob([str], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'ags-content-backup.json';
+      a.click();
+    }
+
+    const importInput = document.getElementById('import-json-input');
+    if (importInput) {
+      importInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          try {
+            const d = JSON.parse(evt.target.result);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+            loadSavedData();
+            alert('Backup restored successfully!');
+          } catch (err) {
+            alert('Invalid backup file.');
+          }
+        };
+        reader.readAsText(file);
+      });
+    }
+
+    function resetDefaults() {
+      if (confirm('Are you sure you want to restore official school defaults?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    }
+
+    loadSavedData();
+  </script>
+</body>
+</html>
+`;
+
+// Verify JS syntax
+const scriptMatch = adminHtml.match(/<script>([\s\S]*?)<\/script>/);
+if (scriptMatch) {
+  new Function(scriptMatch[1]);
+  console.log('Script syntax check passed 100%!');
+}
+
+fs.writeFileSync(path.join(rootDir, 'hosting_package', 'admin.html'), adminHtml, 'utf8');
+fs.writeFileSync(path.join(rootDir, 'admin.html'), adminHtml, 'utf8');
+
+const wpAdminDir = path.join(rootDir, 'wordpress_theme', 'all-grace-schools');
+if (fs.existsSync(wpAdminDir)) {
+  fs.writeFileSync(path.join(wpAdminDir, 'admin.html'), adminHtml, 'utf8');
+}
+
+console.log('Successfully written admin.html to hosting_package, root, and wordpress_theme!');

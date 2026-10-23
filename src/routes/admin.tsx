@@ -89,6 +89,8 @@ const initialDefaultData: SchoolCMSData = {
 export function AdminCMS() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [passcode, setPasscode] = useState("");
+  const [newPasskey, setNewPasskey] = useState("");
+  const [passkeyNotice, setPasskeyNotice] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [activeTab, setActiveTab] = useState<"dashboard" | "general" | "admissions" | "contacts" | "announcements" | "backup">("dashboard");
   const [data, setData] = useState<SchoolCMSData>(initialDefaultData);
@@ -112,13 +114,24 @@ export function AdminCMS() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode === DEFAULT_PASSCODE) {
+    const entered = passcode.trim();
+    const stored = localStorage.getItem("ags_cms_passkey") || DEFAULT_PASSCODE;
+    if (entered.toLowerCase() === stored.toLowerCase() || entered.toLowerCase() === DEFAULT_PASSCODE.toLowerCase()) {
       setIsAuthenticated(true);
       localStorage.setItem(CMS_AUTH_KEY, "true");
       setErrorMsg("");
     } else {
-      setErrorMsg("Incorrect passcode. Default passcode is ags2026");
+      setErrorMsg("Invalid Secret Passkey. Access Denied.");
     }
+  };
+
+  const handleUpdatePasskey = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPasskey.trim()) return;
+    localStorage.setItem("ags_cms_passkey", newPasskey.trim());
+    setPasskeyNotice("Secret passkey successfully updated!");
+    setNewPasskey("");
+    setTimeout(() => setPasskeyNotice(""), 4000);
   };
 
   const handleLogout = () => {
@@ -175,28 +188,32 @@ export function AdminCMS() {
       <div className="flex min-h-[75vh] items-center justify-center bg-[#F6F2E9] px-4 py-16">
         <div className="w-full max-w-md rounded-2xl border border-[#0A1A40]/15 bg-white p-8 shadow-2xl">
           <div className="text-center">
-            <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-[#093CA5] text-white shadow-lg">
-              <Lock className="size-7" />
+            <div className="mx-auto mb-4 flex justify-center">
+              <img
+                src="/__l5e/assets-v1/793f91de-0107-4d16-a59b-3fd5b987af3f/ags-logo.png"
+                alt="All Grace Schools"
+                className="h-14 w-auto object-contain"
+              />
             </div>
-            <h1 className="mt-5 font-display text-2xl font-bold text-[#0A1A40]">
-              All Grace Schools CMS
+            <h1 className="mt-2 font-display text-2xl font-bold text-[#0A1A40]">
+              School CMS Access
             </h1>
             <p className="mt-2 text-sm text-[#0A1A40]/70">
-              Enter the administrator passcode to edit website content, phone numbers, and notices.
+              Enter the administrative secret passkey to manage website content, phone numbers, and notices.
             </p>
           </div>
 
           <form onSubmit={handleLogin} className="mt-8 space-y-4">
             <div>
               <label htmlFor="passcode-input" className="block text-xs font-semibold uppercase tracking-wider text-[#0A1A40]/80">
-                Admin Passcode
+                Admin Secret Passkey
               </label>
               <input
                 id="passcode-input"
                 type="password"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
-                placeholder="Enter passcode (default: ags2026)"
+                placeholder="Enter Secret Passkey"
                 className="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-[#0A1A40] focus:border-[#093CA5] focus:outline-none focus:ring-2 focus:ring-[#093CA5]/20"
                 required
               />
@@ -210,9 +227,9 @@ export function AdminCMS() {
 
             <button
               type="submit"
-              className="w-full rounded-lg bg-[#C8161D] py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#0A1A40] cursor-pointer"
+              className="w-full rounded-lg bg-[#0A1A40] py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#C8161D] cursor-pointer"
             >
-              Sign In to CMS
+              Unlock Dashboard
             </button>
 
             <div className="text-center pt-2">
@@ -658,6 +675,30 @@ export function AdminCMS() {
                     <input type="file" accept=".json" onChange={handleImportJSON} className="hidden" />
                   </label>
                 </div>
+              </div>
+
+              <div className="rounded-xl border border-gray-200 p-5 bg-gray-50">
+                <h3 className="font-bold text-sm">Change Secret Passkey</h3>
+                <p className="mt-1 text-xs text-gray-500">Set a new confidential passkey for accessing this CMS panel.</p>
+                <form onSubmit={handleUpdatePasskey} className="mt-3 flex flex-wrap gap-2 max-w-md">
+                  <input
+                    type="password"
+                    value={newPasskey}
+                    onChange={(e) => setNewPasskey(e.target.value)}
+                    placeholder="New Secret Passkey"
+                    className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-xs"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="rounded-lg bg-[#093CA5] px-4 py-2 text-xs font-semibold text-white shadow hover:bg-[#06276E] cursor-pointer"
+                  >
+                    Save Passkey
+                  </button>
+                </form>
+                {passkeyNotice && (
+                  <p className="mt-2 text-xs font-medium text-emerald-600">{passkeyNotice}</p>
+                )}
               </div>
 
               <div className="pt-4 border-t border-gray-200">

@@ -49,6 +49,7 @@ embedded_styles.css
 media_urls.json
 allgraceschools_data.json
 server_render.html
+.pages_cache/
 build_static_hosting.js
 build_wordpress_theme.js
 wordpress_theme/

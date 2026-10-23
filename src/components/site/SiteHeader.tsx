@@ -13,6 +13,8 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const [menuTop, setMenuTop] = useState(72);
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -31,6 +33,7 @@ export function SiteHeader() {
         toggleRef.current?.focus();
       }
     };
+    setMenuTop(Math.max(0, headerRef.current?.getBoundingClientRect().bottom ?? 72));
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
@@ -71,8 +74,9 @@ export function SiteHeader() {
       </div>
 
       <header
+        ref={headerRef}
         className={cn(
-          "sticky top-0 z-50 border-b bg-background/92 backdrop-blur-md transition-[border-color,box-shadow] duration-300",
+          "sticky top-0 z-50 border-b bg-background transition-[border-color,box-shadow] duration-300",
           scrolled ? "border-border shadow-[0_1px_0_0_var(--border)]" : "border-transparent",
         )}
       >
@@ -137,7 +141,8 @@ export function SiteHeader() {
         <div
           id="mobile-menu"
           hidden={!open}
-          className="fixed inset-x-0 top-[72px] bottom-0 z-40 overflow-y-auto bg-background lg:hidden"
+          style={{ top: menuTop }}
+          className="fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-background lg:hidden"
         >
           <nav aria-label="Mobile" className="container-page flex min-h-full flex-col py-6">
             <ul className="divide-y divide-border border-y">

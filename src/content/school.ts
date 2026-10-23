@@ -342,7 +342,7 @@ export const REVIEW_ITEMS = {
   years:
     "The site says the school has achieved excellence “for the past 7 years”, “10 years” and “12 years” on different pages. Only the founding date is shown here.",
   address:
-    "The About page gives “Clement Isong Avenue, Ring Road 3”, while Contacts lists two gates (Professor Offiong Street and Ring Road 3 by Oron Road). Please confirm the address parents should use.",
+    "The About page gives “Clement Isong Avenue, Ring Road 3”, while Contacts lists two gates (Professor Offiong Street and Ring Road 3 by Oron Road). The map pin on the current Contacts page also sits away from the “All Grace Schools” label on Google Maps. Please confirm the address and map location parents should use.",
   phones:
     "Different pages list different enquiry numbers (07089625023, 07010232509, 07030173737, 08067123248, 08052725687, 08022232076). Only the Admission Officer’s number appears consistently.",
   supervisor:

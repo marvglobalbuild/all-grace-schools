@@ -28,7 +28,7 @@ function Contacts() {
       <PageIntro
         eyebrow="Contact"
         title="Visit, call or write to us."
-        lede={`The admissions desk is open ${admissions.deskHours.toLowerCase()}. The school office is open ${campus.officeHours}.`}
+        lede={`The admissions desk is open ${admissions.deskHours.toLowerCase()}. The school office is open ${campus.officeHours}`}
       >
         <AdmissionsActions />
       </PageIntro>

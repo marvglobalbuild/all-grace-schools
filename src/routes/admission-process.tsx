@@ -23,7 +23,7 @@ export const Route = createFileRoute("/admission-process")({
     pageHead({
       title: "Admissions — how to enrol your child | All Grace Schools, Uyo",
       description:
-        "How admission works at All Grace Schools: interview with the Head of School, the ₦5,000 registration form, required documents, fees and how to contact our Admission Officer.",
+        "How admission works at All Grace Schools: interview with the Head of School, the ₦10,000 registration form, required documents, fees and how to contact our HR Manager.",
       path: "/admission-process",
     }),
   component: Admissions,
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: "How much is the registration form?",
-    a: `The registration form for nursery and primary education costs ${fee} and is collected from the admissions desk.`,
+    a: `The registration form for nursery and grade school education costs ${fee} and is collected from the admissions desk.`,
   },
   {
     q: "What do I need to bring?",
@@ -58,7 +58,7 @@ const faqs = [
   },
   {
     q: "Can I apply online?",
-    a: "The school’s website describes a paper registration form collected from and returned to the admissions desk. Call or email the Admission Officer to begin.",
+    a: "The school’s website describes a paper registration form collected from and returned to the admissions desk. Call or email the HR Manager to begin.",
   },
 ];
 

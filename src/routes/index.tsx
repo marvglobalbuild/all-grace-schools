@@ -43,9 +43,9 @@ const jsonLd = {
 export const Route = createFileRoute("/")({
   head: () => {
     const h = pageHead({
-      title: "All Grace Schools, Uyo — Christian crèche, nursery and primary school",
+      title: "All Grace Schools, Uyo — Christian Play Group, Kindergarten and Grade School",
       description:
-        "Since 2014, All Grace Schools in Uyo, Akwa Ibom State, has offered crèche, kindergarten and primary education rooted in Christian values. Contact our admissions team.",
+        "Since 2014, All Grace Schools in Uyo, Akwa Ibom State, has offered play group, kindergarten and grade school education rooted in Christian values. Contact our admissions team.",
       path: "/",
     });
     return {
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/")({
 });
 
 const stagePhotos = {
-  creche: photos.crechePlayroom,
+  creche: photos.playgroup || photos.crechePlayroom,
   kindergarten: photos.kindergartenClass,
   "lower-grade": photos.classroomWriting,
   "upper-grade": photos.classParticipation,
@@ -98,7 +98,7 @@ function Hero() {
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-[#C8161D] shrink-0" aria-hidden />
           <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-            Crèche · Kindergarten · Primary — {school.city}
+            Play Group · Kindergarten · Grade School — {school.city}
           </p>
         </div>
 
@@ -161,7 +161,7 @@ function Hero() {
           <span className="text-border">•</span>
           <span>Christian Foundation</span>
           <span className="text-border">•</span>
-          <span>Crèche from 6 Months</span>
+          <span>Play Group from 1 Year</span>
           <span className="text-border">•</span>
           <span>{school.city}</span>
         </div>
@@ -213,7 +213,7 @@ function Hero() {
       <div className="container-page hidden md:grid gap-10 pb-16 pt-10 md:pt-16 lg:grid-cols-12 lg:gap-8 lg:pb-24">
         <div className="lg:col-span-6 lg:pt-10 xl:pt-16">
           <p className="eyebrow animate-rise">
-            Crèche · Kindergarten · Primary — {school.city}
+            Play Group · Kindergarten · Grade School — {school.city}
           </p>
           <h1 className="display-xl mt-6 animate-rise" style={{ ["--delay" as string]: "60ms" }}>
             Rooted in God, <em className="font-normal italic text-crest">hard work</em> and
@@ -305,8 +305,7 @@ function Intro() {
         </Reveal>
         <Reveal className="lg:col-span-7" delay={80}>
           <h2 className="display-md">
-            A Christian school in Uyo for children from six months old through the primary
-            grades.
+            A Christian school in Uyo for children from one year old through the grade school levels.
           </h2>
           <div className="prose-school mt-6 max-w-2xl">
             <p>
@@ -406,7 +405,7 @@ function SchoolLife() {
     <section className="py-20 md:py-28">
       <div className="container-page">
         <SectionHeading eyebrow="School life" title="Classrooms, ceremonies and clubs.">
-          Photographs from the school’s own collection: the crèche, kindergarten rooms, lessons
+          Photographs from the school’s own collection: the play group, kindergarten rooms, lessons
           and graduation day.
         </SectionHeading>
 
@@ -462,7 +461,7 @@ function Leadership() {
           <Figure photo={photos.proprietor} imgClassName="aspect-[4/5] object-[50%_35%]" />
         </Reveal>
         <div className="lg:col-span-6 lg:col-start-7">
-          <SectionHeading eyebrow="Leadership" title={`${proprietor.name}, ${proprietor.role}`} />
+          <SectionHeading eyebrow="Leadership" title="Mrs. B. B. Eshiet, Proprietor" />
           <Reveal delay={80}>
             <p className="prose-school mt-6 max-w-xl">
               A trained teacher with a BA and MA in English and a Postgraduate Diploma in

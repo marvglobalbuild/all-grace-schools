@@ -15,7 +15,7 @@ export const Route = createFileRoute("/school-life")({
     pageHead({
       title: "School life — classrooms, clubs and ceremonies | All Grace Schools",
       description:
-        "Photographs and facts about everyday life at All Grace Schools, Uyo: the crèche, classrooms, security, optional clubs and graduation and awards day.",
+        "Photographs and facts about everyday life at All Grace Schools, Uyo: the play group, classrooms, security, optional clubs and graduation and awards day.",
       path: "/school-life",
     }),
   component: SchoolLife,
@@ -23,9 +23,9 @@ export const Route = createFileRoute("/school-life")({
 
 const facilities = [
   {
-    title: "The crèche",
-    body: "A newly improved crèche, described by the school as a home away from home, with good sleeping space and a hygienic feeding area. CCTV cameras monitor staff and children’s activities.",
-    photo: photos.crechePlayroom,
+    title: "The Play Group",
+    body: "A newly improved Play Group, described by the school as a home away from home, with good sleeping space and a hygienic feeding area. CCTV cameras monitor staff and children’s activities.",
+    photo: photos.playgroup,
   },
   {
     title: "Classrooms",
@@ -95,7 +95,113 @@ function SchoolLife() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
+      
+      {/* Student Leadership & Democratic Elections (Vote Flyers) */}
+      <section className="bg-card border-y py-20 md:py-28">
+        <div className="container-page">
+          <div className="max-w-3xl">
+            <SectionHeading
+              eyebrow="Student Leadership & Elections"
+              title="Democratic participation, responsibility and pupil voice."
+            >
+              At All Grace Schools, leadership and civic character are nurtured early. Pupils actively campaign and cast votes in democratic student elections for prefect positions, learning public presentation, integrity, peer accountability, and service.
+            </SectionHeading>
+          </div>
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                photo: photos.voteGames,
+                title: "Games Prefect Campaign",
+                role: "Sports, Athletics & Teamwork",
+                desc: "Promoting physical fitness, fair play, athletics competitions, and team spirit across all grades.",
+              },
+              {
+                photo: photos.voteSanitary,
+                title: "Sanitary Prefect Campaign",
+                role: "Health, Hygiene & Order",
+                desc: "Leading daily classroom cleanliness, personal hygiene standards, and campus environmental care.",
+              },
+              {
+                photo: photos.voteTimekeeper,
+                title: "Timekeeper Campaign",
+                role: "Punctuality & School Discipline",
+                desc: "Upholding punctuality for morning devotions, assembly lines, lesson transitions, and school activities.",
+              },
+            ].map((f, i) => (
+              <Reveal key={f.title} delay={i * 90} className="group overflow-hidden rounded-xl border bg-background shadow-xs hover:shadow-md transition-shadow">
+                <div className="overflow-hidden bg-muted aspect-[4/5]">
+                  <img
+                    src={f.photo.src}
+                    alt={f.photo.alt}
+                    width={f.photo.width}
+                    height={f.photo.height}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-5">
+                  <span className="inline-flex items-center rounded-full bg-crest/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-crest">
+                    {f.role}
+                  </span>
+                  <h3 className="mt-2 text-xl font-display font-semibold text-ink">{f.title}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-muted-foreground">{f.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Additional Co-Curricular & Club highlights */}
+          <div className="mt-14 grid gap-6 md:grid-cols-3 border-t pt-10">
+            <Reveal className="overflow-hidden rounded-xl border bg-background p-4">
+              <div className="aspect-[4/3] overflow-hidden rounded-lg">
+                <img
+                  src={photos.scoutsClub.src}
+                  alt={photos.scoutsClub.alt}
+                  width={photos.scoutsClub.width}
+                  height={photos.scoutsClub.height}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <h4 className="mt-3 font-display text-base font-semibold text-ink">Scouting & Outdoor Leadership</h4>
+              <p className="mt-1 text-xs text-muted-foreground">Building discipline, outdoor navigation, first aid, and survival skills.</p>
+            </Reveal>
+
+            <Reveal className="overflow-hidden rounded-xl border bg-background p-4" delay={60}>
+              <div className="aspect-[4/3] overflow-hidden rounded-lg">
+                <img
+                  src={photos.bookfairBoy.src}
+                  alt={photos.bookfairBoy.alt}
+                  width={photos.bookfairBoy.width}
+                  height={photos.bookfairBoy.height}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <h4 className="mt-3 font-display text-base font-semibold text-ink">Annual Book Fair & Literacy</h4>
+              <p className="mt-1 text-xs text-muted-foreground">Fostering deep reading passion, book reviews, and vocabulary building.</p>
+            </Reveal>
+
+            <Reveal className="overflow-hidden rounded-xl border bg-background p-4" delay={120}>
+              <div className="aspect-[4/3] overflow-hidden rounded-lg">
+                <img
+                  src={photos.pupilsStaircase.src}
+                  alt={photos.pupilsStaircase.alt}
+                  width={photos.pupilsStaircase.width}
+                  height={photos.pupilsStaircase.height}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <h4 className="mt-3 font-display text-base font-semibold text-ink">Order & Campus Fellowship</h4>
+              <p className="mt-1 text-xs text-muted-foreground">A warm, unified student community rooted in mutual respect.</p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+<section className="py-20 md:py-28">
         <div className="container-page grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading eyebrow="Clubs" title="Optional clubs.">

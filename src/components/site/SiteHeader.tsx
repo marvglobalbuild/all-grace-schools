@@ -54,7 +54,7 @@ export function SiteHeader() {
       <div className="hidden bg-ink text-ink-foreground md:block">
         <div className="container-page flex h-9 items-center justify-between text-[12.5px]">
           <p className="opacity-80">
-            Crèche, Kindergarten and Primary · {school.city}, {school.state}
+            Play Group, Kindergarten and Grade School · {school.city}, {school.state}
           </p>
           <div className="flex items-center gap-6">
             <a href={admissions.phone.tel} className="link-underline opacity-90 hover:opacity-100">

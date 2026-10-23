@@ -94,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "All Grace Schools, Uyo" },
       {
         name: "description",
-        content: "All Grace Schools — a Christian crèche, nursery and primary school in Uyo, Akwa Ibom State.",
+        content: "All Grace Schools — a Christian play group, kindergarten and grade school in Uyo, Akwa Ibom State.",
       },
       { name: "theme-color", content: "#0A1A40" },
       { property: "og:site_name", content: "All Grace Schools" },

@@ -10,16 +10,16 @@ import { pageHead } from "@/lib/seo";
 export const Route = createFileRoute("/academics")({
   head: () =>
     pageHead({
-      title: "Academics — crèche, kindergarten and primary grades | All Grace Schools",
+      title: "Academics — Play Group, Kindergarten and Grade School | All Grace Schools",
       description:
-        "Learning stages, subjects and teaching at All Grace Schools, Uyo: Crèche, KG1–KG2, Lower Grade 1–3 and Upper Grade 4–5, with a blended Nigerian and British curriculum.",
+        "Learning stages, subjects and teaching at All Grace Schools, Uyo: Play Group, KG1–KG2, Lower Grade 1–3 and Upper Grade 4–5, with a blended Nigerian and British curriculum.",
       path: "/academics",
     }),
   component: Academics,
 });
 
 const stagePhotos = {
-  creche: photos.crechePlayroom,
+  creche: photos.playgroup,
   kindergarten: photos.kindergartenRoom,
   "lower-grade": photos.classroomWriting,
   "upper-grade": photos.classroomTeacher,

@@ -47,7 +47,7 @@ export const school = {
   ],
   portalUrl: "https://app.edusuite.ng/ags/login",
   facebookUrl: "https://web.facebook.com/allgraceschools",
-  videoUrl: "https://www.youtube.com/watch?v=JKp9cOm5GUY",
+  videoUrl: "/media/school-video.mp4",
 } as const;
 
 /* ------------------------------------------------------------------ */
@@ -61,8 +61,8 @@ const phone = (display: string, e164: string): Phone => ({ display, tel: `tel:${
 /** Admission Officer — listed with the same number and email on both
  * /admission-process/ and /contacts/, and in the site header. */
 export const admissions = {
-  officer: "Miss Ubongabasi J. Edet",
-  role: "Admission Officer",
+  officer: "Ubong Abasi Edet",
+  role: "HR Manager",
   phone: phone("+234 708 962 5023", "+2347089625023"),
   email: "admin@allgraceschools.com",
   /** admission-process + academics (Admission Form) */
@@ -78,7 +78,7 @@ export const campus = {
     },
     { label: "Gate 2", address: "Ring Road 3, end by Oron Road, Uyo" },
   ],
-  officePhones: [phone("+234 806 712 3248", "+2348067123248"), phone("+234 701 023 2509", "+2347010232509")],
+  officePhones: [phone("+234 806 712 3248", "+2348067123248"), phone("+234 810 973 9245", "+2348109739245")],
   generalEmail: "info@allgraceschools.com",
   /** footer */
   officeHours: "Monday – Friday, 8 a.m. – 4 p.m.",
@@ -88,8 +88,8 @@ export const campus = {
 
 /** WhatsApp contacts published in the site-wide chat widget. */
 export const whatsapp = [
-  { name: "Victory Moswill", role: "HR", number: "+234 806 712 3248", href: "https://wa.me/2348067123248" },
-  { name: "Ekom Charles", role: "Supervisor", number: "+234 701 023 2509", href: "https://wa.me/2347010232509" },
+  { name: "Henrietta Smart", role: "HR", number: "+234 706 813 2558", href: "https://wa.me/2347068132558" },
+  { name: "Rebecca Edem", role: "Supervisor", number: "+234 810 973 9245", href: "https://wa.me/2348109739245" },
   { name: "Dr Uyai Eshiet", role: "Board of Trustees", number: "+234 703 017 3737", href: "https://wa.me/2347030173737" },
 ] as const;
 
@@ -98,8 +98,8 @@ export const whatsapp = [
 /* ------------------------------------------------------------------ */
 
 export const admissionRules = {
-  registrationFeeNaira: 5000,
-  registrationFeeAppliesTo: "nursery and primary education",
+  registrationFeeNaira: 10000,
+  registrationFeeAppliesTo: "nursery and grade school education",
   passportPhotos: 2,
   passportPhotoSpec: "Coloured, with a white background",
   deskOpenHour: 9,
@@ -148,9 +148,9 @@ export type Stage = {
 export const stages: Stage[] = [
   {
     id: "creche",
-    name: "The Crèche / Reception",
-    ages: "6 months – 2 years",
-    summary: "Care, rest and early learning through play in a home-away-from-home crèche.",
+    name: "Play Group",
+    ages: "1 year – 2 years",
+    summary: "Care, rest and early learning through play in a warm and secure Play Group.",
     detail: [
       "Well-trained caregivers and nannies, good sleeping space and a hygienic feeding environment.",
       "Basic education that supports cognitive, social and physical development.",
@@ -338,7 +338,7 @@ export const formatDate = (iso: string) =>
 
 export const REVIEW_ITEMS = {
   stages:
-    "The home page lists “Creche, Kindergarten, Junior Grade, Senior Grade”, while the Admission Process page lists Crèche (6 months–2 years), KG1–KG2, Grades 1–3 and Grades 4–5. Ages 2–3 are not covered, and the About page mentions “pupils and students”. Please confirm the stages and ages currently offered.",
+    "The home page lists “Creche, Kindergarten, Junior Grade, Senior Grade”, while the Admission Process page lists Crèche (1 year–2 years), KG1–KG2, Grades 1–3 and Grades 4–5. Ages 2–3 are not covered, and the About page mentions “pupils and students”. Please confirm the stages and ages currently offered.",
   years:
     "The site says the school has achieved excellence “for the past 7 years”, “10 years” and “12 years” on different pages. Only the founding date is shown here.",
   address:
@@ -348,7 +348,7 @@ export const REVIEW_ITEMS = {
   supervisor:
     "The supervisor on 07010232509 is named Ekom Charles on the Admission Process page and Mrs Rebecca Bassey on the Contacts page.",
   fee:
-    "The ₦5,000 registration form fee and admissions instructions are published without a date. Please confirm they are current.",
+    "The ₦10,000 registration form fee and admissions instructions are published without a date. Please confirm they are current.",
   accepting:
     "The site says it is “currently accepting applications for all classes for the academic year” without naming the session.",
   proprietor:

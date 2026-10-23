@@ -9,9 +9,9 @@ import { admissionRules, admissions, formatNaira, stages } from "@/content/schoo
 const router = () => createRouter({ routeTree, context: { queryClient: new QueryClient() } });
 
 describe("Admissions rules published by the school", () => {
-  it("registration form costs ₦5,000", () => {
-    expect(admissionRules.registrationFeeNaira).toBe(5000);
-    expect(formatNaira(admissionRules.registrationFeeNaira)).toBe("₦5,000");
+  it("registration form costs ₦10,000", () => {
+    expect(admissionRules.registrationFeeNaira).toBe(10000);
+    expect(formatNaira(admissionRules.registrationFeeNaira)).toBe("₦10,000");
   });
 
   it("requires two passport photographs", () => {
@@ -31,7 +31,7 @@ describe("Admissions rules published by the school", () => {
 
   it("offers only the four learning stages listed on the Admission Process page", () => {
     expect(stages.map((s) => s.ages)).toEqual([
-      "6 months – 2 years",
+      "1 year – 2 years",
       "3 – 5+ years",
       "6 – 7+ years",
       "8 – 10 years",

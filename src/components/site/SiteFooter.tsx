@@ -25,7 +25,7 @@ export function SiteFooter() {
             <span className="font-display text-2xl">All Grace Schools</span>
           </div>
           <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-ink-foreground/70">
-            A Christian crèche, nursery and primary school in Uyo, Akwa Ibom State. Founded{" "}
+            A Christian play group, kindergarten and grade school in Uyo, Akwa Ibom State. Founded{" "}
             {school.founded.label}.
           </p>
         </div>

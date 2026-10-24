@@ -286,7 +286,7 @@ export const photos = {
   },
   kindergartenRoom: {
     src: "/media/welcome-pupils-balloon-arch.jpeg",
-    alt: "Vibrant early years learning area and welcoming school celebration",
+    alt: "Kindergarten pupils in uniform celebrating early learning at All Grace Schools",
     width: 960,
     height: 1280,
   },

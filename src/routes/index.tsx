@@ -58,7 +58,7 @@ export const Route = createFileRoute("/")({
 
 const stagePhotos = {
   creche: photos.playgroup || photos.crechePlayroom,
-  kindergarten: photos.kindergartenClass,
+  kindergarten: photos.kindergartenRoom,
   "lower-grade": photos.classroomWriting,
   "upper-grade": photos.upperGrade,
 } as const;

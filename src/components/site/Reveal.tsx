@@ -8,9 +8,10 @@ type RevealProps = {
 };
 
 /**
- * Fades content up when it scrolls into view. Content is visible by default
- * (server render, no JS, reduced motion); only elements that start below the
- * fold are hidden, and only once JS is running.
+ * Fades content up when it scrolls into view with subtle, restrained motion.
+ * Content is visible by default (server render, no JS, reduced motion);
+ * only elements that start below the initial viewport fold are animated,
+ * and only once when they first enter the viewport (15-20% visible).
  */
 export function Reveal({ as: Tag = "div", delay = 0, className, children }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
@@ -20,7 +21,7 @@ export function Reveal({ as: Tag = "div", delay = 0, className, children }: Reve
     if (!el || typeof IntersectionObserver === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92) return;
+    if (rect.top < window.innerHeight * 0.85) return;
 
     el.dataset["reveal"] = "pending";
     const io = new IntersectionObserver(
@@ -32,7 +33,7 @@ export function Reveal({ as: Tag = "div", delay = 0, className, children }: Reve
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px" },
+      { rootMargin: "0px 0px -15% 0px", threshold: 0.15 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -41,6 +42,7 @@ export function Reveal({ as: Tag = "div", delay = 0, className, children }: Reve
   return (
     <Tag
       ref={ref}
+      data-reveal-init="true"
       className={className}
       style={delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined}
     >

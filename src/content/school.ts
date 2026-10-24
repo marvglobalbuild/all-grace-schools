@@ -88,8 +88,8 @@ export const campus = {
 
 /** WhatsApp contacts published in the site-wide chat widget. */
 export const whatsapp = [
-  { name: "Henrietta Smart", role: "HR", number: "+234 706 813 2558", href: "https://wa.me/2347068132558" },
-  { name: "Rebecca Edem", role: "Supervisor", number: "+234 810 973 9245", href: "https://wa.me/2348109739245" },
+  { name: "Henrietta Smart", role: "Secretary", number: "+234 706 813 2558", href: "https://wa.me/2347068132558" },
+  { name: "Rebecca Edem", role: "HR Assistant", number: "+234 810 973 9245", href: "https://wa.me/2348109739245" },
   { name: "Dr Uyai Eshiet", role: "Board of Trustees", number: "+234 703 017 3737", href: "https://wa.me/2347030173737" },
 ] as const;
 
@@ -267,7 +267,7 @@ export const reasons = [
 
 export const proprietor = {
   name: "Mrs. B. B. Eshiet",
-  role: "Proprietor",
+  role: "Executive Director",
   qualifications: [
     "Bachelor of Arts in English",
     "Master of Arts in English",
@@ -280,6 +280,82 @@ export const proprietor = {
     "Author of three books used in educational institutions in the State.",
   ],
 } as const;
+
+export type StaffMember = {
+  name: string;
+  role: string;
+  category: "governance" | "management" | "support";
+  categoryLabel: string;
+  photoKey: string;
+  description: string;
+};
+
+export const schoolStaff: StaffMember[] = [
+  {
+    name: "Chairman, Board of Trustees",
+    role: "Chairman BOT",
+    category: "governance",
+    categoryLabel: "Board & Governance",
+    photoKey: "chairmanBot",
+    description: "Presiding over the Board of Trustees, providing strategic governance, institutional stewardship, and Christian foundational guidance for the school.",
+  },
+  {
+    name: "Mr. Ben Esshiet",
+    role: "Director of Administration",
+    category: "governance",
+    categoryLabel: "Executive Administration",
+    photoKey: "directorAdmin",
+    description: "Spearheading administrative strategy, institutional operations, facility modernization, and cross-departmental coordination.",
+  },
+  {
+    name: "Ubong Abasi Edet",
+    role: "HR Manager & Admissions Officer",
+    category: "management",
+    categoryLabel: "School Management",
+    photoKey: "hrManagerPortrait",
+    description: "Managing personnel administration, parent admissions interviews, pupil enrollment processes, and staff professional development.",
+  },
+  {
+    name: "Victory Moswill",
+    role: "School Supervisor",
+    category: "management",
+    categoryLabel: "Academic Supervision",
+    photoKey: "supervisorMoswill",
+    description: "Supervising curriculum implementation, teacher standards, classroom quality, and daily pupil welfare and progress.",
+  },
+  {
+    name: "David John",
+    role: "Assistant Supervisor",
+    category: "management",
+    categoryLabel: "Academic Supervision",
+    photoKey: "assistantSupervisorJohn",
+    description: "Assisting instructional supervision, co-curricular coordination, classroom transitions, and student discipline monitoring.",
+  },
+  {
+    name: "Rebecca Edem",
+    role: "HR Assistant",
+    category: "support",
+    categoryLabel: "Administration & Support",
+    photoKey: "hrAssistantPortrait",
+    description: "Supporting HR desk inquiries, admissions documentation, parent assistance, and school administrative records.",
+  },
+  {
+    name: "Henrietta Smart",
+    role: "School Secretary",
+    category: "support",
+    categoryLabel: "Administration & Support",
+    photoKey: "secretarySmart",
+    description: "Overseeing front office secretarial administration, parent appointments, official correspondence, and pupil registry.",
+  },
+  {
+    name: "Nurse Mfon Udo",
+    role: "School Nurse & Healthcare Officer",
+    category: "support",
+    categoryLabel: "Health & Student Wellness",
+    photoKey: "nurseUdo",
+    description: "Managing school first aid, pediatric health monitoring, health habits coaching, and campus hygiene standards.",
+  },
+];
 
 /* ------------------------------------------------------------------ */
 /* Achievements — /admission-process/ (History) and home page          */
@@ -315,7 +391,7 @@ export const articles = [
   },
   {
     slug: "meet-our-proprietor",
-    title: "Meet our Proprietor",
+    title: "Meet our Executive Director",
     category: "General",
     date: "2024-09-26",
     excerpt: "Mrs. B. B. Eshiet’s career in education and public service, and why she founded the school.",

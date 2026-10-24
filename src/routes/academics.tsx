@@ -22,7 +22,7 @@ const stagePhotos = {
   creche: photos.playgroup,
   kindergarten: photos.kindergartenRoom,
   "lower-grade": photos.classroomWriting,
-  "upper-grade": photos.classroomTeacher,
+  "upper-grade": photos.upperGrade,
 } as const;
 
 function Academics() {
@@ -62,7 +62,7 @@ function Academics() {
               "Computer is taught from Kindergarten, and home-economics practicals, excursions and robotics extend learning beyond the desk.",
             ],
           ].map(([t, b], i) => (
-            <Reveal key={t} delay={i * 80} className="border-t-2 border-ink pt-5">
+            <Reveal key={t} delay={i * 80} className="border-t-2 border-ink pt-5 card-motion">
               <h2 className="text-xl md:text-2xl">{t}</h2>
               <p className="mt-3 text-[15.5px] leading-relaxed text-muted-foreground">{b}</p>
             </Reveal>
@@ -110,7 +110,7 @@ function Academics() {
                 </ul>
               </Reveal>
               {s.subjects && (
-                <Reveal delay={120} className="mt-10 rounded-md border bg-card p-6 md:p-8">
+                <Reveal delay={120} className="mt-10 rounded-md border bg-card p-6 md:p-8 card-motion">
                   <h3 className="text-lg">Subjects at this level</h3>
                   <ul className="mt-5 grid grid-cols-1 gap-x-6 gap-y-2.5 text-[15px] sm:grid-cols-2">
                     {s.subjects.map((sub) => (

@@ -35,7 +35,7 @@ function Contacts() {
 
       <section className="py-16 md:py-24">
         <div className="container-page grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Reveal className="rounded-md border bg-card p-7 md:p-8">
+          <Reveal className="rounded-md border bg-card p-7 md:p-8 card-motion">
             <p className="eyebrow text-tartan">Admissions</p>
             <h2 className="mt-4 text-2xl">{admissions.officer}</h2>
             <p className="text-[14.5px] text-muted-foreground">{admissions.role}</p>
@@ -53,7 +53,7 @@ function Contacts() {
             </ul>
           </Reveal>
 
-          <Reveal className="rounded-md border bg-card p-7 md:p-8" delay={60}>
+          <Reveal className="rounded-md border bg-card p-7 md:p-8 card-motion" delay={60}>
             <p className="eyebrow text-tartan">School office</p>
             <h2 className="mt-4 text-2xl">General enquiries</h2>
             <p className="text-[14.5px] text-muted-foreground">{campus.officeHours}</p>
@@ -73,7 +73,7 @@ function Contacts() {
             </ul>
           </Reveal>
 
-          <Reveal className="rounded-md border bg-card p-7 md:col-span-2 md:p-8 lg:col-span-1" delay={120}>
+          <Reveal className="rounded-md border bg-card p-7 md:col-span-2 md:p-8 lg:col-span-1 card-motion" delay={120}>
             <p className="eyebrow text-tartan">WhatsApp</p>
             <h2 className="mt-4 text-2xl">Message a representative</h2>
             <ul className="mt-6 divide-y border-y">

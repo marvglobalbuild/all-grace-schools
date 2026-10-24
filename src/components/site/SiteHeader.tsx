@@ -81,13 +81,18 @@ export function SiteHeader() {
         )}
       >
         <div className="container-page flex h-[74px] sm:h-[80px] md:h-[84px] items-center justify-between gap-3 sm:gap-6">
-          <Link to="/" className="shrink-0" aria-label="All Grace Schools — home">
+          <Link
+            to="/"
+            className="shrink-0 flex items-center cursor-pointer relative z-50"
+            aria-label="All Grace Schools — home"
+            onClick={() => setOpen(false)}
+          >
             <img
               src={brand.logo.src}
               alt="All Grace Schools"
               width={brand.logo.width}
               height={brand.logo.height}
-              className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto max-h-[56px] object-contain transition-transform"
+              className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto max-h-[56px] object-contain pointer-events-none transition-transform"
             />
           </Link>
 
@@ -153,12 +158,14 @@ export function SiteHeader() {
             <button
               ref={toggleRef}
               type="button"
-              className="flex size-9 sm:size-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-ink shadow-xs transition-colors hover:bg-gray-50 active:scale-95 lg:hidden"
+              id="mobile-menu-btn"
+              className="flex size-9 sm:size-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-ink shadow-xs transition-colors hover:bg-gray-50 active:scale-95 lg:hidden cursor-pointer"
               aria-expanded={open}
               aria-controls="mobile-menu"
+              aria-label="Toggle navigation menu"
               onClick={() => setOpen((v) => !v)}
             >
-              {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
+              {open ? <X className="size-5 pointer-events-none" aria-hidden /> : <Menu className="size-5 pointer-events-none" aria-hidden />}
               <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
             </button>
           </div>
@@ -172,16 +179,28 @@ export function SiteHeader() {
         >
           <nav aria-label="Mobile" className="container-page flex min-h-full flex-col py-6">
             <ul className="divide-y divide-border border-y">
+              <li className="animate-rise" style={{ ["--delay" as string]: "0ms" }}>
+                <Link
+                  to="/"
+                  className="flex items-center justify-between py-4 font-display text-2xl text-ink"
+                  activeProps={{ className: "text-crest", "aria-current": "page" }}
+                  onClick={() => setOpen(false)}
+                >
+                  Home
+                  <ArrowUpRight className="size-5 rotate-45 text-ink/40" aria-hidden />
+                </Link>
+              </li>
               {NAV_LINKS.map((l, i) => (
                 <li
                   key={l.to}
                   className="animate-rise"
-                  style={{ ["--delay" as string]: `${i * 40}ms` }}
+                  style={{ ["--delay" as string]: `${(i + 1) * 40}ms` }}
                 >
                   <Link
                     to={l.to}
                     className="flex items-center justify-between py-4 font-display text-2xl text-ink"
                     activeProps={{ className: "text-crest", "aria-current": "page" }}
+                    onClick={() => setOpen(false)}
                   >
                     {l.label}
                     <ArrowUpRight className="size-5 rotate-45 text-ink/40" aria-hidden />
@@ -191,7 +210,7 @@ export function SiteHeader() {
             </ul>
             <div className="mt-8 grid gap-3">
               <Button asChild variant="admissions" size="lg">
-                <Link to="/admission-process" hash="contact-admissions">
+                <Link to="/admission-process" hash="contact-admissions" onClick={() => setOpen(false)}>
                   Contact Admissions
                 </Link>
               </Button>

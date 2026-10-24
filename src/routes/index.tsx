@@ -60,7 +60,7 @@ const stagePhotos = {
   creche: photos.playgroup || photos.crechePlayroom,
   kindergarten: photos.kindergartenClass,
   "lower-grade": photos.classroomWriting,
-  "upper-grade": photos.classParticipation,
+  "upper-grade": photos.upperGrade,
 } as const;
 
 function Home() {
@@ -340,7 +340,7 @@ function Stages() {
 
         <ol className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {stages.map((s, i) => (
-            <Reveal as="li" key={s.id} delay={i * 80} className="group">
+            <Reveal as="li" key={s.id} delay={i * 80} className="group card-motion rounded-xl p-3 -m-3 hover:bg-card">
               <div className="flex items-baseline justify-between border-t-2 border-ink pt-3">
                 <span className="text-[12px] font-semibold uppercase tracking-[0.14em] text-tartan">
                   {s.ages}
@@ -411,7 +411,7 @@ function SchoolLife() {
 
         <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4">
           <Reveal className="col-span-2 md:col-span-4 md:row-span-2">
-            <Figure photo={photos.crechePlayroom} imgClassName="aspect-[4/3] md:aspect-auto md:h-full" className="h-full" />
+            <Figure photo={photos.playground} imgClassName="aspect-[4/3] md:aspect-auto md:h-full" className="h-full" />
           </Reveal>
           <Reveal className="md:col-span-2" delay={60}>
             <Figure photo={photos.graduandCertificate} imgClassName="aspect-square" />
@@ -420,7 +420,7 @@ function SchoolLife() {
             <Figure photo={photos.pupilPresentation} imgClassName="aspect-square" />
           </Reveal>
           <Reveal className="col-span-2 md:col-span-3" delay={60}>
-            <Figure photo={photos.kindergartenRoom} imgClassName="aspect-[3/2]" />
+            <Figure photo={photos.pupilSmileUniform} imgClassName="aspect-[3/2] object-top" />
           </Reveal>
           <Reveal className="col-span-2 md:col-span-3" delay={120}>
             <Figure photo={photos.awardsCeremony} imgClassName="aspect-[3/2] object-[50%_30%]" />
@@ -461,16 +461,16 @@ function Leadership() {
           <Figure photo={photos.proprietor} imgClassName="aspect-[4/5] object-[50%_35%]" />
         </Reveal>
         <div className="lg:col-span-6 lg:col-start-7">
-          <SectionHeading eyebrow="Leadership" title="Mrs. B. B. Eshiet, Proprietor" />
+          <SectionHeading eyebrow="Leadership" title="Mrs. B. B. Eshiet, Executive Director" />
           <Reveal delay={80}>
             <p className="prose-school mt-6 max-w-xl">
               A trained teacher with a BA and MA in English and a Postgraduate Diploma in
               Education, Mrs. Eshiet worked across education in Akwa Ibom State and later served as
-              a Permanent Secretary before founding All Grace Schools. She is the author of three
+              a Permanent Secretary before founding All Grace Schools as Executive Director. She is the author of three
               books used in educational institutions in the State.
             </p>
             <div className="mt-8">
-              <TextLink to="/meet-our-proprietor">Read her profile</TextLink>
+              <TextLink to="/meet-our-proprietor">Read Executive Director's profile</TextLink>
             </div>
           </Reveal>
 
@@ -503,7 +503,7 @@ function AdmissionsPreview() {
 
         <ol className="mt-14 grid gap-px overflow-hidden rounded-md border bg-border md:grid-cols-3">
           {admissionSteps.map((s, i) => (
-            <Reveal as="li" key={s.title} delay={i * 80} className="bg-background p-7 md:p-9">
+            <Reveal as="li" key={s.title} delay={i * 80} className="bg-background p-7 md:p-9 card-motion">
               <span className="flex size-10 items-center justify-center rounded-full bg-ink font-display text-lg text-ink-foreground">
                 {i + 1}
               </span>
@@ -512,6 +512,58 @@ function AdmissionsPreview() {
             </Reveal>
           ))}
         </ol>
+        {/* Dedicated Admissions Desk & HR Support Feature */}
+        <Reveal className="mt-12 overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-paper via-white to-secondary p-6 shadow-sm lg:p-9 card-motion">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-4">
+              <div className="card-motion-img relative overflow-hidden rounded-xl shadow-photo group aspect-[4/5] max-w-[280px] mx-auto lg:max-w-none">
+                <img
+                  src={photos.hrOffice.src}
+                  alt={photos.hrOffice.alt}
+                  width={photos.hrOffice.width}
+                  height={photos.hrOffice.height}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+                  <span className="text-xs font-semibold text-white/90">HR &amp; Admissions Office</span>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-8">
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Admissions Desk Support</span>
+              </div>
+              <h3 className="mt-2 text-2xl font-bold tracking-tight text-ink md:text-3xl">
+                Ready to enroll? Speak directly with our HR &amp; Admissions Desk.
+              </h3>
+              <p className="mt-3 text-[15.5px] leading-relaxed text-muted-foreground">
+                Our HR Manager, <strong className="text-ink">{admissions.officer}</strong>, and admissions coordinators are available on campus weekdays from 9 a.m. to 3 p.m. to welcome your family, answer questions, and assist with registration forms and teller payments.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <a
+                  href={admissions.phone.tel}
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#C8161D] px-5 py-3 text-sm font-bold text-white shadow-xs transition hover:bg-[#a51117] active:scale-95 cursor-pointer"
+                >
+                  <span>Call {admissions.phone.display}</span>
+                </a>
+                <a
+                  href="https://wa.me/2347089625023?text=Hello%20Ubong%20Abasi%20Edet%2C%20I%20would%20like%20to%20inquire%20about%20enrolling%20my%20child%20at%20All%20Grace%20Schools."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-5 py-3 text-sm font-semibold text-ink shadow-xs transition hover:bg-slate-50 active:scale-95 cursor-pointer"
+                >
+                  <svg className="size-4.5 fill-[#25D366]" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.711 1.456h.005c6.554 0 11.89-5.336 11.893-11.893a11.82 11.82 0 00-3.48-8.413Z"/></svg>
+                  <span>WhatsApp Admissions</span>
+                </a>
+                <Link to="/admission-process" className="text-sm font-semibold text-crest hover:underline ml-2">
+                  View full admission process &rarr;
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
 
         <Reveal as="dl" className="mt-10 grid gap-6 sm:grid-cols-3">
           <div>

@@ -23,9 +23,9 @@ export const Route = createFileRoute("/school-life")({
 
 const facilities = [
   {
-    title: "The Play Group",
-    body: "A newly improved Play Group, described by the school as a home away from home, with good sleeping space and a hygienic feeding area. CCTV cameras monitor staff and children’s activities.",
-    photo: photos.playgroup,
+    title: "Campus Playground & Outdoor Recreation",
+    body: "Spacious outdoor playground and recreational facilities equipped for active physical play, motor coordination, sports, and joyful peer interaction in a secure, monitored campus setting.",
+    photo: photos.playground,
   },
   {
     title: "Classrooms",
@@ -56,7 +56,7 @@ function SchoolLife() {
           <SectionHeading eyebrow="Spaces and care" title="Where your child spends the day." />
           <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-8">
             {facilities.map((f, i) => (
-              <Reveal key={f.title} delay={i * 80}>
+              <Reveal key={f.title} delay={i * 80} className="card-motion">
                 <Figure photo={f.photo} imgClassName="aspect-[4/3]" />
                 <h3 className="mt-6 text-2xl">{f.title}</h3>
                 <p className="mt-3 text-[15.5px] leading-relaxed text-muted-foreground">{f.body}</p>
@@ -87,7 +87,7 @@ function SchoolLife() {
               photos.awardsCeremony,
               photos.pupilPresentation,
             ].map((ph, i) => (
-              <Reveal as="li" key={ph.src} delay={i * 60}>
+              <Reveal as="li" key={ph.src} delay={i * 60} className="card-motion">
                 <Figure photo={ph} imgClassName="aspect-[3/4] object-top" />
               </Reveal>
             ))}
@@ -197,6 +197,81 @@ function SchoolLife() {
               <h4 className="mt-3 font-display text-base font-semibold text-ink">Order & Campus Fellowship</h4>
               <p className="mt-1 text-xs text-muted-foreground">A warm, unified student community rooted in mutual respect.</p>
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+
+      {/* School Community, Welcome & Special Moments (from new photos collection) */}
+      <section className="bg-paper-deep border-b py-20 md:py-28">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="School Community & Moments"
+            title="Joyful learning, career milestones and school spirit."
+          >
+            Every school term at All Grace Schools is filled with celebration, cultural enrichment, career discovery, and shared joy among pupils, teachers, and parents.
+          </SectionHeading>
+
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                photo: photos.pupilCareerStairs,
+                title: "Career Day Aspirations",
+                desc: "Pupils dressed in professional attire exploring future vocations and ambitions."
+              },
+              {
+                photo: photos.welcomePupilsArch,
+                title: "Welcome Back Celebrations",
+                desc: "Festive balloon arches welcoming pupils to a vibrant new academic session."
+              },
+              {
+                photo: photos.pupilGirlTartanFrame,
+                title: "School Pride & Character",
+                desc: "Confident pupils in official tartan uniform embodying discipline and excellence."
+              },
+              {
+                photo: photos.pupilBoyTieFrame,
+                title: "Smart & Ready to Learn",
+                desc: "High standards of presentation, punctuality, and enthusiasm for the classroom."
+              },
+              {
+                photo: photos.pupilGirlRibbonFrame,
+                title: "Nurturing Every Child",
+                desc: "Early childhood care and mentorship supporting confidence and happiness."
+              },
+              {
+                photo: photos.welcomeGirlFrame,
+                title: "Smiles & Community Spirit",
+                desc: "Creating joyful memories on campus from the very first day of school."
+              },
+              {
+                photo: photos.pupilSmileUniform,
+                title: "Safe & Friendly Atmosphere",
+                desc: "A warm Christian learning environment where pupils thrive academically and socially."
+              },
+              {
+                photo: photos.pupilReadingBookfair,
+                title: "Curiosity & Exploration",
+                desc: "Encouraging pupils to discover new books and cultivate lifelong reading habits."
+              }
+            ].map((item, idx) => (
+              <Reveal key={item.title} delay={idx * 60} className="group interactive-card overflow-hidden rounded-xl border bg-background shadow-xs hover:shadow-lg transition-all">
+                <div className="aspect-[4/5] overflow-hidden bg-muted interactive-img-container">
+                  <img
+                    src={item.photo.src}
+                    alt={item.photo.alt}
+                    width={item.photo.width}
+                    height={item.photo.height}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h4 className="font-display text-base font-semibold text-ink group-hover:text-crest transition-colors">{item.title}</h4>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

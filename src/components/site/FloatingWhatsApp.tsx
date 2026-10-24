@@ -160,22 +160,6 @@ export function FloatingWhatsApp() {
 
       {/* Floating Trigger Area */}
       <div className="flex items-center gap-2">
-        {/* Mobile Prompt Chip (modeled directly on reference screenshot) */}
-        {!open && (
-          <div
-            onClick={handleToggle}
-            className="flex flex-col rounded-xl border border-border/80 bg-white/95 px-3 py-2 text-left shadow-lg backdrop-blur-md cursor-pointer transition-transform hover:scale-[1.02] active:scale-95 sm:hidden max-w-[200px]"
-          >
-            <p className="text-[10.5px] text-muted-foreground font-medium truncate">
-              Have admission questions?
-            </p>
-            <p className="flex items-center gap-1 text-[11.5px] font-bold text-ink">
-              <span>Chat with our team</span>
-              <span className="text-crest">→</span>
-            </p>
-          </div>
-        )}
-
         {/* Floating WhatsApp Action Button */}
         <button
           type="button"

@@ -12,7 +12,7 @@ export const Route = createFileRoute("/news")({
     pageHead({
       title: "News and updates | All Grace Schools, Uyo",
       description:
-        "Articles from All Grace Schools: why parents choose the school, how to enrol your child, and an introduction to our Proprietor.",
+        "Articles from All Grace Schools: why parents choose the school, how to enrol your child, and an introduction to our Executive Director.",
       path: "/news",
     }),
   component: News,
@@ -32,7 +32,7 @@ function News() {
           <Reveal>
             <Link
               to={`/${lead.slug}`}
-              className="group grid gap-8 lg:grid-cols-12 lg:items-center"
+              className="group grid gap-8 lg:grid-cols-12 lg:items-center card-motion rounded-xl p-3 -m-3 hover:bg-card/50"
             >
               <div className="overflow-hidden rounded-md lg:col-span-7">
                 <img
@@ -60,7 +60,7 @@ function News() {
           <ul className="mt-16 grid gap-10 border-t pt-12 md:grid-cols-2">
             {rest.map((a, i) => (
               <Reveal as="li" key={a.slug} delay={i * 80}>
-                <Link to={`/${a.slug}`} className="group grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6">
+                <Link to={`/${a.slug}`} className="group grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 card-motion rounded-xl p-3 -m-3 hover:bg-card/50">
                   <div className="overflow-hidden rounded-md">
                     <img
                       src={articleCover[a.slug].src}

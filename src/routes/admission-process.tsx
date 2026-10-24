@@ -81,7 +81,7 @@ function Admissions() {
           <ol className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
             <span aria-hidden className="absolute left-5 top-5 hidden h-px w-[calc(100%-2.5rem)] bg-border md:block" />
             {admissionSteps.map((s, i) => (
-              <Reveal as="li" key={s.title} delay={i * 90} className="relative">
+              <Reveal as="li" key={s.title} delay={i * 90} className="relative card-motion">
                 <span className="relative flex size-10 items-center justify-center rounded-full bg-tartan font-display text-lg text-tartan-foreground">
                   {i + 1}
                 </span>
@@ -155,8 +155,19 @@ function Admissions() {
 
       {/* Contact */}
       <section id="contact-admissions" className="scroll-mt-24 bg-ink text-ink-foreground">
-        <div className="container-page grid gap-12 py-20 md:py-24 lg:grid-cols-12">
-          <Reveal className="lg:col-span-6">
+        <div className="container-page grid gap-12 py-20 md:py-24 lg:grid-cols-12 lg:items-center">
+          <Reveal className="lg:col-span-4">
+            <div className="overflow-hidden rounded-2xl border border-white/15 shadow-2xl interactive-card aspect-[4/5] max-w-[280px] mx-auto lg:max-w-none">
+              <img
+                src={photos.hrOffice.src}
+                alt={photos.hrOffice.alt}
+                width={photos.hrOffice.width}
+                height={photos.hrOffice.height}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal className="lg:col-span-4 lg:col-start-5">
             <p className="eyebrow text-ink-foreground/60">Contact admissions</p>
             <h2 className="display-lg mt-4">{admissions.officer}</h2>
             <p className="mt-2 text-ink-foreground/70">{admissions.role}</p>

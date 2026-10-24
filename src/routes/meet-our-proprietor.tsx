@@ -8,9 +8,9 @@ import { pageHead } from "@/lib/seo";
 export const Route = createFileRoute("/meet-our-proprietor")({
   head: () =>
     pageHead({
-      title: "Meet our Proprietor, Mrs. B. B. Eshiet | All Grace Schools",
+      title: "Meet our Executive Director, Mrs. B. B. Eshiet | All Grace Schools",
       description:
-        "The career in education and public service of Mrs. B. B. Eshiet, founder and Proprietor of All Grace Schools, Uyo.",
+        "The career in education and public service of Mrs. B. B. Eshiet, founder and Executive Director of All Grace Schools, Uyo.",
       path: "/meet-our-proprietor",
       type: "article",
     }),

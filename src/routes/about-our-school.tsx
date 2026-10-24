@@ -4,7 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { ReviewNote } from "@/components/site/ReviewNote";
 import { AdmissionsBand, Figure, PageIntro, SectionHeading, TextLink } from "@/components/site/blocks";
 import { photos } from "@/content/images";
-import { achievements, proprietor, school } from "@/content/school";
+import { achievements, proprietor, school, schoolStaff } from "@/content/school";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/about-our-school")({
@@ -55,7 +55,7 @@ function About() {
           </Reveal>
           <ol className="mt-14 grid gap-px overflow-hidden rounded-md bg-ink-foreground/15 sm:grid-cols-2 lg:grid-cols-5">
             {school.coreValues.map((v, i) => (
-              <Reveal as="li" key={v} delay={i * 60} className="bg-ink p-7">
+              <Reveal as="li" key={v} delay={i * 60} className="bg-ink p-7 card-motion">
                 <span className="font-display text-sm text-ink-foreground/50">0{i + 1}</span>
                 <p className="mt-8 font-display text-xl leading-snug">{v}</p>
               </Reveal>
@@ -143,34 +143,157 @@ function About() {
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="py-20 md:py-28">
-        <div className="container-page grid gap-12 lg:grid-cols-12 lg:items-center">
-          <Reveal className="lg:col-span-4">
-            <Figure photo={photos.proprietor} imgClassName="aspect-[4/5] object-[50%_35%]" />
-          </Reveal>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <SectionHeading eyebrow="Leadership" title={proprietor.name}>
-              {proprietor.role}
-            </SectionHeading>
-            <Reveal delay={80}>
-              <ul className="mt-8 space-y-3 text-[15.5px] leading-relaxed">
-                {proprietor.career.map((c) => (
-                  <li key={c} className="flex gap-3">
-                    <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-tartan" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-8 text-[15px] text-muted-foreground">{achievements.governance}</p>
-              <div className="mt-8 flex flex-wrap gap-6">
-                <TextLink to="/meet-our-proprietor">Full profile</TextLink>
-                <TextLink to="/academics">Academics</TextLink>
-                <TextLink to="/admission-process">Admissions</TextLink>
+      {/* Leadership & Staff Team */}
+      <section className="py-20 md:py-28 bg-card border-t">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Leadership & Staff Team"
+            title="Experienced leaders, dedicated educators and caring staff."
+          >
+            Behind the academic excellence and nurturing Christian environment of All Grace Schools is a team of visionary leaders, qualified administrators, and devoted support personnel.
+          </SectionHeading>
+
+          {/* Executive Director Feature */}
+          <div className="mt-14 rounded-2xl border bg-background p-6 md:p-10 shadow-xs">
+            <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+              <Reveal className="lg:col-span-5">
+                <div className="overflow-hidden rounded-xl border aspect-[4/5] bg-muted shadow-xs">
+                  <img
+                    src={photos.proprietor.src}
+                    alt={photos.proprietor.alt}
+                    width={photos.proprietor.width}
+                    height={photos.proprietor.height}
+                    className="h-full w-full object-cover object-[50%_35%]"
+                    loading="lazy"
+                  />
+                </div>
+              </Reveal>
+              <div className="lg:col-span-7">
+                <span className="inline-flex items-center rounded-full bg-crest/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-crest">
+                  {proprietor.role}
+                </span>
+                <h3 className="mt-3 font-display text-3xl font-semibold text-ink sm:text-4xl">
+                  {proprietor.name}
+                </h3>
+                <Reveal delay={80}>
+                  <ul className="mt-6 space-y-3 text-[15.5px] leading-relaxed text-ink/85">
+                    {proprietor.career.map((c) => (
+                      <li key={c} className="flex gap-3">
+                        <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-tartan" />
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-6 text-[15px] text-muted-foreground">{achievements.governance}</p>
+                  <div className="mt-8 flex flex-wrap gap-5">
+                    <TextLink to="/meet-our-proprietor">Read Executive Director's profile</TextLink>
+                    <TextLink to="/academics">Academics</TextLink>
+                    <TextLink to="/admission-process">Admissions</TextLink>
+                  </div>
+                </Reveal>
               </div>
-            </Reveal>
-            <ReviewNote item="proprietor" className="mt-8" />
+            </div>
           </div>
+
+          {/* Board of Trustees & Executive Management */}
+          <div className="mt-16">
+            <div className="border-b pb-4">
+              <h3 className="font-display text-2xl font-semibold text-ink">
+                Board of Trustees & Executive Governance
+              </h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Providing institutional vision, fiduciary stewardship, and strategic leadership.
+              </p>
+            </div>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              {schoolStaff
+                .filter((s) => s.category === "governance")
+                .map((member, idx) => {
+                  const photo = photos[member.photoKey as keyof typeof photos] || photos.campus;
+                  return (
+                    <Reveal
+                      key={member.name}
+                      delay={idx * 80}
+                      className="group interactive-card flex flex-col overflow-hidden rounded-2xl border bg-background shadow-xs hover:shadow-lg transition-all"
+                    >
+                      <div className="aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-muted interactive-img-container">
+                        <img
+                          src={photo.src}
+                          alt={photo.alt}
+                          width={photo.width}
+                          height={photo.height}
+                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col p-6">
+                        <span className="inline-flex w-fit items-center rounded-full bg-tartan/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-tartan">
+                          {member.categoryLabel}
+                        </span>
+                        <h4 className="mt-3 font-display text-xl font-semibold text-ink group-hover:text-crest transition-colors">
+                          {member.name}
+                        </h4>
+                        <p className="mt-1 text-sm font-medium text-crest">{member.role}</p>
+                        <p className="mt-3 flex-1 text-[14px] leading-relaxed text-muted-foreground">
+                          {member.description}
+                        </p>
+                      </div>
+                    </Reveal>
+                  );
+                })}
+            </div>
+          </div>
+
+          {/* School Management & Administrative Team */}
+          <div className="mt-16">
+            <div className="border-b pb-4">
+              <h3 className="font-display text-2xl font-semibold text-ink">
+                School Management & Student Welfare
+              </h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Driving academic quality, operational coordination, admissions, and pupil care every day.
+              </p>
+            </div>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {schoolStaff
+                .filter((s) => s.category !== "governance")
+                .map((member, idx) => {
+                  const photo = photos[member.photoKey as keyof typeof photos] || photos.campus;
+                  return (
+                    <Reveal
+                      key={member.name}
+                      delay={idx * 60}
+                      className="group interactive-card flex flex-col overflow-hidden rounded-2xl border bg-background shadow-xs hover:shadow-lg transition-all"
+                    >
+                      <div className="aspect-[4/5] overflow-hidden bg-muted interactive-img-container">
+                        <img
+                          src={photo.src}
+                          alt={photo.alt}
+                          width={photo.width}
+                          height={photo.height}
+                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col p-5">
+                        <span className="inline-flex w-fit items-center rounded-full bg-crest/10 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-crest">
+                          {member.categoryLabel}
+                        </span>
+                        <h4 className="mt-2.5 font-display text-lg font-semibold text-ink group-hover:text-crest transition-colors">
+                          {member.name}
+                        </h4>
+                        <p className="mt-1 text-xs font-semibold text-tartan">{member.role}</p>
+                        <p className="mt-2.5 flex-1 text-[13.5px] leading-relaxed text-muted-foreground">
+                          {member.description}
+                        </p>
+                      </div>
+                    </Reveal>
+                  );
+                })}
+            </div>
+          </div>
+
+          <ReviewNote item="proprietor" className="mt-14" />
         </div>
       </section>
 
